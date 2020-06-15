@@ -42,7 +42,7 @@ body {
   font-size: 12px;
   line-height: 30px;
   color: #777;
-  background-image: url('src/assets/img/img1.jpg');
+  background-image: url('../assets/img1.jpg');
 }
 
 .container {

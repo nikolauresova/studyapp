@@ -86,7 +86,7 @@ main .site-title .btn:hover {
   background: white;
   transition: height 1s ease-in-out;
   height: 100vh;
-  background-image: url('src/assets/img/img1.jpg');
+  background-image: url('../assets/img1.jpg');
   background-size: cover;
   
 }
