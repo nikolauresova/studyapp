@@ -1,8 +1,10 @@
 import Vue from 'vue';
 import VueRouter from 'vue-router'
-import Page1 from './components/Page1';
-import Page2 from './components/Page2';
+import Login from './components/Login';
+import Word from './components/Word';
+import Deck from './components/Deck';
 import App from './components/App';
+import list_decks from './components/list_decks';
 import './index.html';
 
 Vue.use(VueRouter);
@@ -10,8 +12,10 @@ Vue.use(VueRouter);
 const router = new VueRouter({
   mode: 'history',
   routes: [
-    { path: '/page1', component: Page1 },
-    { path: '/page2', component: Page2 },
+    { path: '/login', component: Login },
+    { path: '/word', component: Word },
+    { path: '/deck', component: Deck },
+    { path: '/list-decks', component: list_decks },
   ],
 });
 

@@ -1,7 +1,7 @@
 <template>
   <div class="container">
 
-    <router-link to="/login"></router-link>
+    <router-link to="/login">Login</router-link>
 
 <nav class="nav">
 <div class="nav-menu flex-row">
