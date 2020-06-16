@@ -5,6 +5,7 @@ import App from './components/App';
 import Word from './components/Word';
 import Cards from './components/Cards';
 import createCard from './components/createCard'
+import Sign from './components/Sign'
 import './index.html';
 
 Vue.use(VueRouter);
@@ -16,6 +17,8 @@ const router = new VueRouter({
     { path: '/word', component: Word },
     { path: '/cards', component: Cards },
     { path: '/createCard', component: createCard },
+    { path: '/sign', component: Sign },
+
   ],
 });
 
