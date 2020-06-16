@@ -1,8 +1,6 @@
 <template>
   <div class="container">
 
-    <router-link to="/login">Login</router-link>
-
 <nav class="nav">
 <div class="nav-menu flex-row">
 <div class="nav-brand">
@@ -11,7 +9,7 @@
 <div>
   <ul class="nav-items">
 <li class="nav-link">
-  <a href="#">Decks</a>
+ <router-link to="/login">Login</router-link>
 </li>
   </ul>
 </div>
@@ -21,8 +19,8 @@
   <section class="site-title">
     <div class="site-backround">
       <h3>Learning can be fun</h3>
-      <h1>Create decks and learn languages all over the world</h1>
-      <button class="btn">Login</button>
+      <h1>Create cards and learn languages all over the world</h1>
+      <button class="btn">Get started</button>
     </div>
   </section>
 </main>
@@ -46,41 +44,6 @@ body {
   overflow-x: hidden;
   font-family: "Lato", sans-serif;
 }
-a {
-  text-decoration: none;
-  color: #3f4954;
-}
-.text-gray {
-  font-size: 2.1rem !important;
-  margin: 20px;
-}
-
-.flex-row {
-  display: flex;
-  flex-direction: row;
-}
-ul {
-  list-style-type: none;
-}
-h1 {
-  font-size: 2.5rem;
-}
-h3 {
-  font-size: 1.3rem;
-}
-.btn {
-  border: none;
-  border-radius:5px;
-  padding: 1rem 3rem;
-  font-size: 1rem;
-  cursor: pointer;
-  color: white;
-}
-main .site-title .btn:hover {
-  transition: background-color 0.3s ease-in-out;
-  background-color: #09c;
-}
-
 /*nav*/
 .nav {
   background: white;
@@ -114,6 +77,47 @@ main .site-title .btn:hover {
   display: block;
   font-size: 1.6rem;
 }
+
+a {
+  text-decoration: none;
+  color: #3f4954;
+}
+.text-gray {
+  font-size: 3rem !important;
+  margin: 20px;
+  font-weight: 400;
+  font-family: 'Gochi Hand', cursive !important;
+}
+
+.flex-row {
+  display: flex;
+  flex-direction: row;
+}
+
+ul {
+  list-style-type: none;
+}
+h1 {
+  font-size: 2.5rem;
+}
+h3 {
+  font-size: 1.3rem;
+}
+
+
+.btn {
+  border: none;
+  border-radius:5px;
+  padding: 1rem 3rem;
+  font-size: 1rem;
+  cursor: pointer;
+  color: white;
+}
+main .site-title .btn:hover {
+  transition: background-color 0.3s ease-in-out;
+  background-color: #09c;
+}
+
 
 /*main section*/
 

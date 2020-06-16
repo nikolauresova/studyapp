@@ -1,5 +1,5 @@
 <template>
-<nav class="nav">
+ <nav class="nav">
     <div class="nav-menu flex-row">
     <div class="nav-brand">
       <a href="#" class="text-gray">#studyApp</a>
@@ -14,28 +14,24 @@
     </div> 
 
    <div class="container">
-    <form id="word" action="" method="post">
-      <h3>Create word</h3>
+    <form id="createCard" action="" method="post">
+      <h3>Create deck</h3>
       
       <fieldset>
-        <input type="text" placeholder="Front" required autofocus>
+        <input  type="text" placeholder="Name your card" id="card_input" required autofocus>
       </fieldset>
       <fieldset>
-        <input type="text" placeholder="Back" required autofocus>
-      </fieldset>
-      
-      <fieldset>
-        <button name="submit" type="submit" id="word-submit" data-submit="Sending">Submit</button>
+        <button name="submit" type="submit" id="card-submit" data-submit="Sending">Submit</button>
       </fieldset>
     </form>
   </div>
-</nav>
+ </nav>
 
 </template>
 
 <script>
 export default {
-  name: "Word"
+  name: "createCard"
 }
 </script>
 
@@ -123,24 +119,24 @@ h3 {
   max-width: 400px;
   margin: 0 auto;
   position: relative;
-  box-shadow:  0px 0px 15px 0px rgba(0, 0, 0, .45);
+  box-shadow: 0px 0px 15px 0px rgba(0, 0, 0, 0.45);
 }
 
-#word input {
-  font: 400 12px/16px 'Lato', sans-serif;
-  width: 328px;
+#createCard input {
+   font: 400 12px/16px "Lato", sans-serif;
+  max-width: 329px;
 }
 
-#word {
+#createCard {
   background: #f3eeee7e;
   padding: 25px;
   margin: 50px 0;
 }
 
-#word h3 {
+#createCard h3 {
   color: #3f4954;
-  display: block;
   text-align: center;
+  display: block;
   font-size: 30px;
   font-weight: 400;
   margin-bottom: 25px;
@@ -154,32 +150,31 @@ fieldset {
   width: 100%;
 }
 
-#word input {
+#createCard input {
+  width: 100%;
   border: 1px solid #ccc;
   background: #fff;
   margin: 0 0 5px;
   padding: 10px;
 }
 
-
-#word input:hover {
+#dcreateCard input:hover {
   border: 1px solid #aaa;
 }
 
-#word button {
+#createCard button {
   cursor: pointer;
   border: none;
-  background: rgb(89, 180,202);
+  background: rgb(75, 182, 209);
   color: #fff;
+  margin-top: 20px;
   padding: 10px;
   font-size: 14px;
   width: 100%;
 }
 
-#word button:hover {
+#createCard button:hover {
   background: #09c;
   transition: background-color 0.3s ease-in-out;
 }
-
-
 </style>

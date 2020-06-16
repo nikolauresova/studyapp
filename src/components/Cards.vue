@@ -1,4 +1,18 @@
 <template>
+<nav class="nav">
+    <div class="nav-menu flex-row">
+    <div class="nav-brand">
+      <a href="#" class="text-gray">#studyApp</a>
+    </div>
+    <div>
+      <ul class="nav-items">
+    <li class="nav-link">
+      <a href="#">Login</a>
+    </li>
+      </ul>
+    </div>
+    </div> 
+
   <div class="container">
     <ul class="flex-card-list">
       <!-- card list -->
@@ -26,6 +40,7 @@
       </li>
     </ul>
   </div>
+</nav>
 </template>
 
 <script>
