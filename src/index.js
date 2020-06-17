@@ -1,5 +1,6 @@
 import Vue from 'vue';
 import VueRouter from 'vue-router'
+import Homepage from './components/Homepage';
 import Login from './components/Login';
 import App from './components/App';
 import Word from './components/Word';
@@ -18,6 +19,7 @@ const router = new VueRouter({
     { path: '/cards', component: Cards },
     { path: '/createCard', component: createCard },
     { path: '/sign', component: Sign },
+    { path: '/homepage', component: Homepage },
 
   ],
 });
