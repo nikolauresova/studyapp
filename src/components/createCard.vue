@@ -2,7 +2,7 @@
  <nav class="nav">
     <div class="nav-menu flex-row">
     <div class="nav-brand">
-      <a href="#" class="text-gray">#studyApp</a>
+      <router-link class="text-gray" to="/">#studyApp</router-link>
     </div>
     <div>
       <ul class="nav-items">
@@ -15,7 +15,7 @@
 
    <div class="container">
     <form id="createCard" action="" method="post">
-      <h3>Create deck</h3>
+      <h3>Create card</h3>
       
       <fieldset>
         <input  type="text" placeholder="Name your card" id="card_input" required autofocus>

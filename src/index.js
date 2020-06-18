@@ -19,7 +19,7 @@ const router = new VueRouter({
     { path: '/cards', component: Cards },
     { path: '/createCard', component: createCard },
     { path: '/sign', component: Sign },
-    { path: '/homepage', component: Homepage },
+    { path: '', component: Homepage },
 
   ],
 });

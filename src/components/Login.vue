@@ -2,7 +2,7 @@
   <nav class="nav">
     <div class="nav-menu flex-row">
     <div class="nav-brand">
-      <a href="#" class="text-gray">#studyApp</a>
+      <router-link class="text-gray" to="/">#studyApp</router-link>
     </div>
     <div>
       <ul class="nav-items">

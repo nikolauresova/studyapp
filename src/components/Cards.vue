@@ -2,7 +2,7 @@
 <nav class="nav">
     <div class="nav-menu flex-row">
     <div class="nav-brand">
-      <a href="#" class="text-gray">#studyApp</a>
+      <router-link class="text-gray" to="/">#studyApp</router-link>
     </div>
     <div>
       <ul class="nav-items">
@@ -23,10 +23,10 @@
           <h3 class="flex-card-heading">English</h3>
           <div class="bt">
             <div class="btns">
-              <a href="#" class="flex-card-button">Add</a>
-              <a href="#" class="flex-card-button">Study</a>
-              <a href="#" class="flex-card-button">Browser</a>
-              <a href="#" class="flex-card-button">Delete</a>
+              <button class="flex-card-button" @click="add">Add</button>
+              <button class="flex-card-button" @click="study">Study</button>
+              <button class="flex-card-button" @click="browser">Browser</button>
+              <button class="flex-card-button" @click="Delete">Delete</button>
             </div>
           </div>
         </div>
@@ -35,7 +35,7 @@
         <!-- card list item -->
         <div class="flex-card">
           <!-- card module -->
-          <a href="#" class="flex-card-button2">Create deck</a>
+          <button class="flex-card-button2" @click="createCard">Create card</button>
         </div>
       </li>
     </ul>
@@ -44,7 +44,20 @@
 </template>
 
 <script>
-export default {};
+export default {
+  name: 'Cards',
+  methods: {
+    add () {
+      this.$router.push('/word');
+    },
+    createCard () {
+      this.$router.push('./createCard')
+    },
+    Delete () {
+      alert(this.$router.Delete)
+    }
+  },
+};
 </script>
 
 <style scoped>
@@ -79,7 +92,7 @@ body {
   min-width: 20rem;
 }
 
-.flex-card {
+.flex-card{
   padding: 10px;
   width: 280px;
   height: 200px;
@@ -94,11 +107,12 @@ body {
   font-size: 2rem;
 }
 .flex-card-button {
-  font-size: 15px;
+  font-size: 16px;
   text-decoration: none;
+  border: none;
   color: #fff;
   background: rgb(89, 180, 202);
-  padding: 10px;
+  padding: 9px;
   text-align: center;
   margin-top: 35px;
   width: 35;
@@ -118,8 +132,9 @@ body {
 }
 
 .flex-card-button2 {
-  font-size: 15px;
+  font-size: 16px;
   text-decoration: none;
+  border: none;
   color: #fff;
   background: rgb(89, 180, 202);
   padding: 10px;

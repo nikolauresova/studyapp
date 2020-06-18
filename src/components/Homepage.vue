@@ -1,48 +1,60 @@
 <template>
   <div class="container">
-
+    
 <nav class="nav">
 <div class="nav-menu flex-row">
 <div class="nav-brand">
-  <a href="#" class="text-gray">#studyApp</a>
 </div>
 <div>
   <ul class="nav-items">
 <li class="nav-link">
- <router-link to="/login">Login</router-link>
+  <router-link to="/login">Login</router-link>
 </li>
   </ul>
 </div>
 </div> 
-
+  
 <main>
   <section class="site-title">
     <div class="site-backround">
       <h3>Learning can be fun</h3>
       <h1>Create cards and learn languages all over the world</h1>
-      <button class="btn">Get started</button>
+      <button class="btn" @click="login">Get started</button>
     </div>
   </section>
 </main>
 </nav>
-  
     <router-view></router-view>
   </div>
 </template>
 
 <script>
 export default {
-  name: 'App',
+  name: 'Homepage',
+  methods: {
+    login () {
+      this.$router.push('/login');
+    }
+  }
 };
 </script>
 
 <style lang="css">
+
+/*nav*/
 html,
 body {
   margin: 0%;
   box-sizing: border-box;
-  overflow-x: hidden;
   font-family: "Lato", sans-serif;
+  text-rendering: optimizeLegibility;
+}
+
+body {
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 30px;
+  color: #777;
 }
 /*nav*/
 .nav {
@@ -61,14 +73,15 @@ body {
   margin: 20px;
 }
 .nav .nav-items .nav-link {
-  padding: 1.6rem 1rem;
-  font-size: 1.3rem;
+  padding: 1.6rem 2rem;
+  font-size: 1.6rem;
   position: relative;
 }
 
 .nav .nav-items .nav-link:hover a {
   color: #fff;
-  transition: background-color 0.3s ease-in-out;
+  transition: color 0.3s ease-in-out;
+  
 }
 
 .nav .nav-brand a {
@@ -86,14 +99,13 @@ a {
   font-size: 3rem !important;
   margin: 20px;
   font-weight: 400;
-  font-family: 'Gochi Hand', cursive !important;
+  font-family: 'Gochi Hand', cursive;
 }
 
 .flex-row {
   display: flex;
   flex-direction: row;
 }
-
 ul {
   list-style-type: none;
 }
@@ -103,6 +115,8 @@ h1 {
 h3 {
   font-size: 1.3rem;
 }
+
+
 
 
 .btn {
@@ -117,7 +131,6 @@ main .site-title .btn:hover {
   transition: background-color 0.3s ease-in-out;
   background-color: #09c;
 }
-
 
 /*main section*/
 
@@ -135,5 +148,6 @@ main .site-title .btn {
   margin: 1.8rem;
   background: rgba(9, 185, 255, 0.788);
 }
+
 
 </style>
