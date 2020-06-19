@@ -1,17 +1,12 @@
 <template>
   <div class="container">
 
-<nav class="nav">
-<div class="nav-menu flex-row">
-<div class="nav-brand">
- <router-link class="text-gray" to="/">#studyApp</router-link>
-
-</div>
-</div> 
-
-</nav>
+<header class="header">
+  <router-link class="logo" to="/">#studyApp</router-link>
   
     <router-view></router-view>
+</header>
+
   </div>
 </template>
 
@@ -22,41 +17,39 @@ export default {
 </script>
 
 <style lang="css">
-html,
 body {
-  margin: 0%;
-  box-sizing: border-box;
-  font-family: "Lato", sans-serif;
+  margin: 0;
+  font-family: Lato, sans-serif;
   text-rendering: optimizeLegibility;
-}
-
-body {
-  font-weight: 400;
-  font-size: 12px;
-  line-height: 30px;
-  color: #777;
-}
-
-/*nav*/
-.nav {
-  height: 100vh;
-  background-image: url('../assets/img1.jpg');
-  background-size: cover;
-  
-}
-.nav .nav-menu {
-  justify-content: space-between;
+  box-sizing: border-box;
 }
 
 a {
-  text-decoration: none;
-  color: #3f4954;
+  color: #000;
 }
-.text-gray {/*logo*/
-  font-size: 3rem !important;
-  margin: 20px;
-  font-weight: 400;
+
+/* header */
+
+.header {
+  box-shadow: 1px 1px 4px 0 rgba(0,0,0,.1);
+  position: fixed;
+  width: 100%;
+  z-index: 3;
+  background-image: url('../assets/img1.jpg');
+  background-size: cover;
+  background-position: center;
+  height: 100vh;
+}
+.header .logo {
+  display: block;
   font-family: 'Gochi Hand', cursive !important;
+  float: left;
+  font-size: 3.3em;
+  padding: 10px 20px;
+  text-decoration: none;
+  font-weight: 400;
 }
+
+
 
 </style>
