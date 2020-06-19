@@ -3,10 +3,8 @@
 
 <header class="header">
   <router-link class="logo" to="/">#studyApp</router-link>
-  
-    <router-view></router-view>
 </header>
-
+<router-view/>
   </div>
 </template>
 
@@ -42,6 +40,7 @@ a {
 }
 .header .logo {
   display: block;
+  z-index: 100;
   font-family: 'Gochi Hand', cursive !important;
   float: left;
   font-size: 3.3em;

@@ -1,6 +1,5 @@
 <template>
-  <div class="container">
-    
+
   <header class="header">
     <router-link class="logo" to="/">#studyApp</router-link>
     <input class="menu-btn" type="checkbox" id="menu-btn" />
@@ -11,36 +10,16 @@
       <li><a href="#careers">X</a></li>
       <li><a href="#contact">X</a></li>
     </ul>
-  
-<main>
-  <section class="site-title">
-    <div class="site-background">
-      <h3>Learning can be fun</h3>
-      <h1>Create cards and learn languages all over the world</h1>
-      <button class="btn" @click="login">Get started</button>
-    </div>
-  </section>
-</main>
   </header>
 
-    <router-view></router-view>
-  </div>
 </template>
 
 <script>
 export default {
-  name: 'Homepage',
-  methods: {
-    login () {
-      this.$router.push('/login');
-    }
-  }
-};
+  name: 'Study'
+}
 </script>
-
-<style lang="css">
-
-/*nav*/
+<style scoped>
 body {
   margin: 0;
   font-family: Lato, sans-serif;
@@ -184,44 +163,4 @@ a {
   }
 
 }
-
-h1 {
-  font-size: 2.5rem;
-  margin: 1rem;
-}
-h3 {
-  font-size: 1.3rem;
-  margin: 1rem;
-}
-
-.btn {
-  border: none;
-  border-radius:5px;
-  padding: 1rem 3rem;
-  font-size: 1rem;
-  cursor: pointer;
-  color: white;
-}
-main .site-title .btn:hover {
-  transition: background-color 0.3s ease-in-out;
-  background-color: #09c;
-}
-
-/*main section*/
-
-/*site title */
-main .site-title .site-background {
-  color: #fff;
-  padding-top: 250px;
-  text-align: center;
-  text-shadow: 0 1px 2px hsla(0,0%,4%,.6);
-}
-
-main .site-title .btn {
-  margin: 1.8rem;
-  background: rgba(9, 185, 255, 0.788);
-  text-shadow: 0 1px 2px hsla(0,0%,4%,.6);
-}
-
-
 </style>
