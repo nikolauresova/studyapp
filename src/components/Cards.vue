@@ -27,7 +27,10 @@
                   <button class="flex-card-button" @click="browser">
                     Browser
                   </button>
-                  <button class="flex-card-button" @click="Delete">
+                  <button
+                    class="flex-card-button"
+                    @click="deleteCard(deck._id)"
+                  >
                     Delete
                   </button>
                 </div>
@@ -41,7 +44,7 @@
             <div class="flex-card">
               <!-- card module -->
               <button class="flex-card-button2" @click="createCard">
-                Create card
+                Create deck
               </button>
             </div>
           </li>
@@ -68,8 +71,22 @@ export default {
     createCard() {
       this.$router.push("./createCard");
     },
-    Delete() {
-      alert(this.$router.Delete);
+    deleteCard(id) {
+      // alert(this.$router.deleteCard);
+      const token = localStorage.getItem("token");
+      axios
+        .delete(`https://study-app-api.herokuapp.com/api/v1/decks/${id}`, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        })
+        .then((resp) => {
+          console.log(`Deck with id ${id} was deleted.`);
+          this.updateDecks();
+        })
+        .catch(function(err) {
+          console.log(err);
+        });
     },
     study() {
       console.log("Study");
@@ -77,22 +94,24 @@ export default {
     browser() {
       console.log("Browser");
     },
+    updateDecks() {
+      const token = localStorage.getItem("token");
+      axios
+        .get("https://study-app-api.herokuapp.com/api/v1/decks/", {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        })
+        .then((resp) => {
+          this.decks = resp.data.data;
+        })
+        .catch(function(err) {
+          console.log(err);
+        });
+    },
   },
-  beforeCreate() {
-    const token = localStorage.getItem("token");
-    axios
-      .get("https://study-app-api.herokuapp.com/api/v1/decks/", {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      })
-      .then((resp) => {
-        this.decks = resp.data.data;
-        console.log(this.decks);
-      })
-      .catch(function(err) {
-        console.log(err);
-      });
+  created() {
+    this.updateDecks();
   },
 };
 </script>
