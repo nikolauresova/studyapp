@@ -1,60 +1,92 @@
 <template>
- <header class="header">
-   <router-link class="logo" to="/">#studyApp</router-link>
+  <header class="header">
+    <router-link class="logo" to="/">#studyApp</router-link>
     <input class="menu-btn" type="checkbox" id="menu-btn" />
-    <label class="menu-icon" for="menu-btn"><span class="navicon"></span></label>
+    <label class="menu-icon" for="menu-btn"
+      ><span class="navicon"></span
+    ></label>
     <ul class="menu">
       <li><router-link to="/login">Login</router-link></li>
       <li><a href="#about">X</a></li>
       <li><a href="#careers">X</a></li>
       <li><a href="#contact">X</a></li>
     </ul>
-<div class="nav">
- <div class="container">
-    <ul class="flex-card-list">
-      <!-- card list -->
-      <li class="flex-card-listitem">
-        <!-- card list item -->
-        <div class="flex-card">
-          <!-- card module -->
-          <h3 class="flex-card-heading">English</h3>
-          <div class="bt">
-            <div class="btns">
-              <button class="flex-card-button" @click="add">Add</button>
-              <button class="flex-card-button" @click="study">Study</button>
-              <button class="flex-card-button" @click="browser">Browser</button>
-              <button class="flex-card-button" @click="Delete">Delete</button>
+    <div class="nav">
+      <div class="container">
+        <ul class="flex-card-list">
+          <!-- card list -->
+          <li class="flex-card-listitem">
+            <!-- card list item -->
+            <div class="flex-card">
+              <!-- card module -->
+              <h3 class="flex-card-heading">English</h3>
+              <div class="bt">
+                <div class="btns">
+                  <button class="flex-card-button" @click="add">Add</button>
+                  <button class="flex-card-button" @click="study">Study</button>
+                  <button class="flex-card-button" @click="browser">
+                    Browser
+                  </button>
+                  <button class="flex-card-button" @click="Delete">
+                    Delete
+                  </button>
+                </div>
+              </div>
             </div>
-          </div>
-        </div>
-      </li>
-      <li class="flex-card-listitem">
-        <!-- card list item -->
-        <div class="flex-card">
-          <!-- card module -->
-          <button class="flex-card-button2" @click="createCard">Create card</button>
-        </div>
-      </li>
-    </ul>
- </div>
-</div>
- </header>
- 
+          </li>
+          <li class="flex-card-listitem">
+            <!-- card list item -->
+            <div class="flex-card">
+              <!-- card module -->
+              <button class="flex-card-button2" @click="createCard">
+                Create card
+              </button>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </header>
 </template>
 
 <script>
+import axios from "axios";
+
 export default {
-  name: 'Cards',
+  name: "Cards",
   methods: {
-    add () {
-      this.$router.push('/word');
+    add() {
+      this.$router.push("/word");
     },
-    createCard () {
-      this.$router.push('./createCard')
+    createCard() {
+      this.$router.push("./createCard");
     },
-    Delete () {
-      alert(this.$router.Delete)
-    }
+    Delete() {
+      alert(this.$router.Delete);
+    },
+    study() {
+      console.log("Study");
+    },
+    browser() {
+      console.log("Browser");
+    },
+  },
+  beforeCreate() {
+    // Get token from logged in user
+    const token = localStorage.getItem("token");
+    const header = `Authorization: Bearer ${token}`;
+    axios
+      .get("https://study-app-api.herokuapp.com/api/v1/decks/", {
+        headers: {
+          header,
+        },
+      })
+      .then(function(resp) {
+        console.log(resp.data);
+      })
+      .catch(function(err) {
+        console.log(err);
+      });
   },
 };
 </script>
@@ -80,7 +112,7 @@ a {
 .header {
   width: 100%;
   z-index: 3;
-  background-image: url('../assets/img1.jpg');
+  background-image: url("../assets/img1.jpg");
   background-size: cover;
   background-position: center;
   height: 100vh;
@@ -110,7 +142,7 @@ a {
 
 .header .logo {
   display: block;
-  font-family: 'Gochi Hand', cursive !important;
+  font-family: "Gochi Hand", cursive !important;
   float: left;
   font-size: 2.9em;
   padding: 10px 20px;
@@ -146,11 +178,11 @@ a {
 .header .menu-icon .navicon:before,
 .header .menu-icon .navicon:after {
   background: #333;
-  content: '';
+  content: "";
   display: block;
   height: 100%;
   position: absolute;
-  transition: all .2s ease-out;
+  transition: all 0.2s ease-out;
   width: 100%;
 }
 
@@ -204,7 +236,6 @@ a {
   .header .menu-icon {
     display: none;
   }
-
 }
 
 .flex-card-list {
@@ -224,7 +255,7 @@ a {
   min-width: 20rem;
 }
 
-.flex-card{
+.flex-card {
   padding: 10px;
   width: 280px;
   height: 200px;

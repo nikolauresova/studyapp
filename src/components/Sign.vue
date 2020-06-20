@@ -85,6 +85,7 @@ export default {
         })
         .then(function(resp) {
           localStorage.setItem("token", resp.data.token);
+          location.href = "/cards";
         })
         .catch(function(err) {
           console.log(err);
