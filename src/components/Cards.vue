@@ -13,13 +13,13 @@
     </ul>
     <div class="nav">
       <div class="container">
-        <ul class="flex-card-list">
+        <ul class="flex-card-list" v-for="deck in decks" v-bind:key="deck._id">
           <!-- card list -->
           <li class="flex-card-listitem">
             <!-- card list item -->
             <div class="flex-card">
               <!-- card module -->
-              <h3 class="flex-card-heading">English</h3>
+              <h3 class="flex-card-heading">{{ deck.name }}</h3>
               <div class="bt">
                 <div class="btns">
                   <button class="flex-card-button" @click="add">Add</button>
@@ -34,6 +34,8 @@
               </div>
             </div>
           </li>
+        </ul>
+        <ul>
           <li class="flex-card-listitem">
             <!-- card list item -->
             <div class="flex-card">
@@ -54,6 +56,11 @@ import axios from "axios";
 
 export default {
   name: "Cards",
+  data() {
+    return {
+      decks: [],
+    };
+  },
   methods: {
     add() {
       this.$router.push("/word");
@@ -72,17 +79,16 @@ export default {
     },
   },
   beforeCreate() {
-    // Get token from logged in user
     const token = localStorage.getItem("token");
-    const header = `Authorization: Bearer ${token}`;
     axios
       .get("https://study-app-api.herokuapp.com/api/v1/decks/", {
         headers: {
-          header,
+          Authorization: `Bearer ${token}`,
         },
       })
-      .then(function(resp) {
-        console.log(resp.data);
+      .then((resp) => {
+        this.decks = resp.data.data;
+        console.log(this.decks);
       })
       .catch(function(err) {
         console.log(err);
