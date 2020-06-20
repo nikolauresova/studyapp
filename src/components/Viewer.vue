@@ -224,16 +224,6 @@ a {
   margin: 50px 0;
 }
 
-.tab h3 {
-  color: #3f4954;
-  display: block;
-  text-align: center;
-  font-size: 30px;
-  font-weight: 400;
-  margin-bottom: 25px;
-}
-
-
 table {
   border: 1px solid #ccc;
   border-collapse: collapse;

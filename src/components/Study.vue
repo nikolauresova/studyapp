@@ -1,43 +1,98 @@
 <template>
-
   <header class="header">
     <router-link class="logo" to="/">#studyApp</router-link>
     <input class="menu-btn" type="checkbox" id="menu-btn" />
-    <label class="menu-icon" for="menu-btn"><span class="navicon"></span></label>
+    <label class="menu-icon" for="menu-btn"
+      ><span class="navicon"></span
+    ></label>
     <ul class="menu">
-      <li><router-link to="/Sign">Sign up</router-link></li>
+      <li><router-link to="/login">Login</router-link></li>
       <li><a href="#about">X</a></li>
       <li><a href="#careers">X</a></li>
       <li><a href="#contact">X</a></li>
     </ul>
-  </header>
+    <div class="nav">
+      <div class="container">
+        <div class="tab">
+          <br />
+          <table>
+            <caption>
+              class dffhdh dhdfhdfh dhdhddh dhdfhdfhd dhfdhdh dhdfhdfh
+              <hr />
+            </caption>
 
+            <caption>
+              třída
+            </caption>
+
+            <button class="flex-card-button">Show answer</button>
+            <button class="buttons">know</button>
+            <button class="buttons">don't know</button>
+          </table>
+        </div>
+      </div>
+    </div>
+  </header>
 </template>
 
 <script>
 export default {
-  name: 'Study'
-}
+  name: "Sign",
+};
 </script>
+
 <style scoped>
+.buttons {
+  font-size: 16px;
+  text-decoration: none;
+  border: none;
+  color: #fff;
+  background: rgb(89, 180, 202);
+  padding: 9px;
+  text-align: center;
+  margin: 40px;
+  width: 33%;
+}
+caption {
+  padding: 15px;
+}
 body {
   margin: 0;
   font-family: Lato, sans-serif;
   text-rendering: optimizeLegibility;
   box-sizing: border-box;
+  line-height: 1.25;
 }
 
 a {
   color: #000;
 }
+.flex-card-button {
+  font-size: 16px;
+  text-decoration: none;
+  border: none;
+  color: #fff;
+  background: rgb(89, 180, 202);
+  padding: 9px;
+  text-align: center;
+  margin-top: 35px;
+  width: 100%;
+  display: inline-block;
+}
+.flex-card-button:hover {
+  background: #09c;
+  transition: background-color 0.3s ease-in-out;
+}
 
 /* header */
-
+.nav {
+  margin-top: 150px;
+}
 .header {
-  box-shadow: 1px 1px 4px 0 rgba(0,0,0,.1);
+  box-shadow: 1px 1px 4px 0 rgba(0, 0, 0, 0.1);
   position: fixed;
   width: 100%;
-  background-image: url('../assets/img1.jpg');
+  background-image: url("../assets/img1.jpg");
   background-size: cover;
   background-position: center;
   height: 100vh;
@@ -67,7 +122,7 @@ a {
 
 .header .logo {
   display: block;
-  font-family: 'Gochi Hand', cursive !important;
+  font-family: "Gochi Hand", cursive !important;
   float: left;
   font-size: 2.9em;
   padding: 10px 20px;
@@ -103,11 +158,11 @@ a {
 .header .menu-icon .navicon:before,
 .header .menu-icon .navicon:after {
   background: #333;
-  content: '';
+  content: "";
   display: block;
   height: 100%;
   position: absolute;
-  transition: all .2s ease-out;
+  transition: all 0.2s ease-out;
   width: 100%;
 }
 
@@ -161,6 +216,30 @@ a {
   .header .menu-icon {
     display: none;
   }
+}
+/*form*/
 
+.container {
+  max-width: 550px;
+  margin: 0 auto;
+  position: relative;
+  box-shadow: 0px 0px 15px 0px rgba(0, 0, 0, 0.45);
+}
+.tab {
+  background: #f3eeee7e;
+  padding: 25px;
+  margin: 50px 0;
+}
+
+table {
+  border-collapse: collapse;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+}
+
+table caption {
+  font-size: 1.5em;
+  margin: 0.5em 0 0.75em;
 }
 </style>
