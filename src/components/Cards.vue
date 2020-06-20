@@ -284,6 +284,9 @@ a {
   /*nadpis*/
   text-align: center;
   font-size: 2rem;
+  overflow: hidden;
+  text-overflow: ellipsis; 
+  white-space: nowrap; 
 }
 .flex-card-button {
   padding: 12px;
