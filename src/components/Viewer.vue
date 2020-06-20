@@ -2,63 +2,99 @@
   <header class="header">
     <router-link class="logo" to="/">#studyApp</router-link>
     <input class="menu-btn" type="checkbox" id="menu-btn" />
-    <label class="menu-icon" for="menu-btn"><span class="navicon"></span></label>
+    <label class="menu-icon" for="menu-btn"
+      ><span class="navicon"></span
+    ></label>
     <ul class="menu">
       <li><router-link to="/login">Login</router-link></li>
       <li><a href="#about">X</a></li>
       <li><a href="#careers">X</a></li>
       <li><a href="#contact">X</a></li>
     </ul>
-<div class="nav">
-  <div class="container">
-    <div class="tab">
-      <table>
-    <caption>English Summary</caption>
-    <thead>
-      <tr>
-        
-        <th scope="col">Front</th>
-        <th scope="col">Back</th>
-        <th scope="col">Status</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td data-label="Front">Dog</td>
-        <td data-label="Back">pes</td>
-        <td data-label="Amount">know</td>
-      </tr>
-      <tr>
-        <td scope="row" data-label="Front">Hello</td>
-        <td data-label="Back">Ahoj</td>
-        <td data-label="Amount">don't know</td>
-        
-      </tr>
-      <tr>
-        <td scope="row" data-label="Account">red</td>
-        <td data-label="Due Date">červený</td>
-        <td data-label="Amount">know</td>
-        
-      </tr>
-      <tr>
-        <td scope="row" data-label="Acount">black</td>
-        <td data-label="Due Date">černý</td>
-        <td data-label="Amount">know</td>
-        
-      </tr>
-    </tbody>
-  </table>
-      
+    <div class="nav">
+      <div class="container">
+        <div class="tab">
+          <table>
+            <caption>
+              List of items
+            </caption>
+            <thead>
+              <tr>
+                <th scope="col">Front</th>
+                <th scope="col">Back</th>
+                <th scope="col">Status</th>
+                <th colspan="2" scope="col">Change</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr v-for="item in vocabulary" v-bind:key="item._id">
+                <td data-label="Front">{{ item.front }}</td>
+                <td data-label="Back">{{ item.back }}</td>
+                <td data-label="Amount">{{ item.status }}</td>
+                <td @click="removeVocabulary(item._id)">X</td>
+                <td @click="editVocabulary(item._id)">I</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
     </div>
-  </div>
-</div>
   </header>
 </template>
 
 <script>
+import axios from "axios";
 export default {
-  name: 'Sign'
-}
+  name: "Sign",
+  data() {
+    return {
+      deckId: "5eecc71eb6c0b61498147b89",
+      vocabulary: [],
+    };
+  },
+  methods: {
+    getVocabulary() {
+      const token = localStorage.getItem("token");
+
+      axios
+        .get(
+          `https://study-app-api.herokuapp.com/api/v1/decks/${this.deckId}/vocabulary`,
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        )
+        .then((resp) => {
+          this.vocabulary = resp.data.data;
+          console.log(this.vocabulary);
+        })
+        .catch(function(err) {
+          console.log(err);
+        });
+    },
+    removeVocabulary(id) {
+      const token = localStorage.getItem("token");
+
+      axios
+        .delete(`https://study-app-api.herokuapp.com/api/v1/vocabulary/${id}`, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        })
+        .then((resp) => {
+          console.log(`Vocabulary with id ${id} was deleted.`);
+          this.getVocabulary();
+        })
+        .catch(function(err) {
+          console.log(err);
+        });
+    },
+  },
+  created() {
+    this.getVocabulary();
+  },
+};
 </script>
 
 <style scoped>
@@ -79,10 +115,10 @@ a {
   margin-top: 150px;
 }
 .header {
-  box-shadow: 1px 1px 4px 0 rgba(0,0,0,.1);
+  box-shadow: 1px 1px 4px 0 rgba(0, 0, 0, 0.1);
   position: fixed;
   width: 100%;
-  background-image: url('../assets/img1.jpg');
+  background-image: url("../assets/img1.jpg");
   background-size: cover;
   background-position: center;
   height: 100vh;
@@ -112,7 +148,7 @@ a {
 
 .header .logo {
   display: block;
-  font-family: 'Gochi Hand', cursive !important;
+  font-family: "Gochi Hand", cursive !important;
   float: left;
   font-size: 2.9em;
   padding: 10px 20px;
@@ -148,11 +184,11 @@ a {
 .header .menu-icon .navicon:before,
 .header .menu-icon .navicon:after {
   background: #333;
-  content: '';
+  content: "";
   display: block;
   height: 100%;
   position: absolute;
-  transition: all .2s ease-out;
+  transition: all 0.2s ease-out;
   width: 100%;
 }
 
@@ -206,7 +242,6 @@ a {
   .header .menu-icon {
     display: none;
   }
-
 }
 /*form*/
 
@@ -217,9 +252,8 @@ a {
   box-shadow: 0px 0px 15px 0px rgba(0, 0, 0, 0.45);
 }
 
-
 .tab {
-  background:#f3eeee7e;
+  background: #f3eeee7e;
   padding: 25px;
   margin: 50px 0;
 }
@@ -235,28 +269,28 @@ table {
 
 table caption {
   font-size: 1.5em;
-  margin: .5em 0 .75em;
+  margin: 0.5em 0 0.75em;
 }
 
 table tr {
   background-color: #f8f8f8;
   border: 1px solid #ddd;
-  padding: .35em;
+  padding: 0.35em;
 }
 
 table tr:hover {
   background-color: rgb(175, 233, 233);
-  transition: background-color 0.3s 
+  transition: background-color 0.3s;
 }
 table th,
 table td {
-  padding: .625em;
+  padding: 0.625em;
   text-align: center;
 }
 
 table th {
-  font-size: .85em;
-  letter-spacing: .1em;
+  font-size: 0.85em;
+  letter-spacing: 0.1em;
   text-transform: uppercase;
 }
 
@@ -304,6 +338,4 @@ table th {
     border-bottom: 0;
   }
 }*/
-
-
 </style>
