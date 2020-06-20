@@ -20,7 +20,7 @@
             <div class="flex-card">
               <!-- card module -->
               <h3 class="flex-card-heading">{{ deck.name }}</h3>
-              <div class="bt">
+              
                 <div class="btns">
                   <button class="flex-card-button" @click="add(deck._id)">
                     Add
@@ -36,7 +36,7 @@
                     Delete
                   </button>
                 </div>
-              </div>
+              
             </div>
           </li>
         </ul>
@@ -265,22 +265,13 @@ a {
     display: none;
   }
 }
-
-.flex-card-list {
-  list-style-type: none;
-  margin: 0;
-  padding: 0;
+.container {
   display: flex;
-  flex-flow: row wrap;
+   flex-flow: row wrap;
   justify-content: center;
-  margin-top: 50px;
 }
-
 .flex-card-listitem {
-  padding: 10px;
-  display: flex;
-  flex-flow: column nowrap;
-  min-width: 20rem;
+  padding: 18px;
 }
 
 .flex-card {
@@ -293,11 +284,12 @@ a {
   flex-flow: column nowrap;
   box-shadow: 0px 0px 15px 0px rgba(0, 0, 0, 0.45);
 }
-.flex-card-heading {
+.flex-card-heading {/*nadpis*/ 
   text-align: center;
   font-size: 2rem;
 }
 .flex-card-button {
+  padding: 12px;
   font-size: 16px;
   text-decoration: none;
   border: none;
@@ -314,12 +306,8 @@ a {
   background: #09c;
   transition: background-color 0.3s ease-in-out;
 }
-.bt {
-  display: flex;
-  justify-content: center;
-}
 .btns {
-  margin-top: 20px;
+  margin: 0 auto;
 }
 
 .flex-card-button2 {
