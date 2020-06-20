@@ -74,6 +74,8 @@ export default {
         )
         .then((resp) => {
           console.log("Deck was added to database");
+          this.name = "";
+          location.href = "/word";
         })
         .catch(function(err) {
           console.log(err);
