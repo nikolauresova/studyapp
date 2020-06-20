@@ -15,7 +15,7 @@
       <h3>Login</h3>
       
       <fieldset>
-        <input  type="text" id="name" placeholder="Your name" required autofocus>
+        <input  type="email" id="email" value="" placeholder="Your email" required autofocus>
       </fieldset>
       <fieldset>
         <input type="password" id="password" placeholder="Your password" required>

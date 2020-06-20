@@ -18,6 +18,9 @@
         <input  type="text" id="name" placeholder="Your name" required autofocus>
       </fieldset>
       <fieldset>
+        <input  type="email" id="email" value= "" placeholder="Your e-mail" required autofocus>
+      </fieldset>
+      <fieldset>
         <input type="password" id="password" placeholder="Your password" required>
       </fieldset>
       
