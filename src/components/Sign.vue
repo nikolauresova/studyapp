@@ -72,6 +72,7 @@ export default {
       name: "",
       email: "",
       password: "",
+      token: localStorage.getItem("token"),
     };
   },
   methods: {
@@ -82,11 +83,11 @@ export default {
           email: this.email,
           password: this.password,
         })
-        .then(function(response) {
-          console.log(response);
+        .then(function(resp) {
+          localStorage.setItem("token", resp.data.token);
         })
-        .catch(function(error) {
-          console.log(error);
+        .catch(function(err) {
+          console.log(err);
         });
     },
   },
