@@ -1,44 +1,85 @@
 <template>
- <header class="header">
+  <header class="header">
     <router-link class="logo" to="/">#studyApp</router-link>
     <input class="menu-btn" type="checkbox" id="menu-btn" />
-    <label class="menu-icon" for="menu-btn"><span class="navicon"></span></label>
+    <label class="menu-icon" for="menu-btn"
+      ><span class="navicon"></span
+    ></label>
     <ul class="menu">
       <li><router-link to="/login">Login</router-link></li>
       <li><a href="#about">X</a></li>
       <li><a href="#careers">X</a></li>
       <li><a href="#contact">X</a></li>
     </ul>
-<div class="nav">
-  <div class="container">
-    <form id="log" action="" method="post">
-      <h3>Login</h3>
-      
-      <fieldset>
-        <input  type="email" id="email" value="" placeholder="Your email" required autofocus>
-      </fieldset>
-      <fieldset>
-        <input type="password" id="password" placeholder="Your password" required>
-      </fieldset>
-      
-      <fieldset>
-        <button name="submit" type="submit" id="log-submit" data-submit="Sending">Submit</button>
-        
-      </fieldset>
-    </form>
-  </div>
-  </div>
- </header>
+    <div class="nav">
+      <div class="container">
+        <form id="log" action="" method="post" @submit.prevent="login">
+          <h3>Login</h3>
 
+          <fieldset>
+            <input
+              type="email"
+              id="email"
+              value=""
+              placeholder="Your email"
+              v-model="email"
+              required
+              autofocus
+            />
+          </fieldset>
+          <fieldset>
+            <input
+              type="password"
+              id="password"
+              placeholder="Your password"
+              v-model="password"
+              required
+            />
+          </fieldset>
 
-
+          <fieldset>
+            <button
+              name="submit"
+              type="submit"
+              id="log-submit"
+              data-submit="Sending"
+            >
+              Submit
+            </button>
+          </fieldset>
+        </form>
+      </div>
+    </div>
+  </header>
 </template>
 
 <script>
+import axios from "axios";
 export default {
-  name: 'Login'
-  
-}
+  name: "Login",
+  data() {
+    return {
+      email: "",
+      password: "",
+      token: localStorage.getItem("token"),
+    };
+  },
+  methods: {
+    login() {
+      axios
+        .post("https://study-app-api.herokuapp.com/api/v1/auth/login", {
+          email: this.email,
+          password: this.password,
+        })
+        .then(function(resp) {
+          localStorage.setItem("token", resp.data.token);
+        })
+        .catch(function(err) {
+          console.log(err);
+        });
+    },
+  },
+};
 </script>
 
 <style scoped>
@@ -56,10 +97,10 @@ a {
 /* header */
 
 .header {
-  box-shadow: 1px 1px 4px 0 rgba(0,0,0,.1);
+  box-shadow: 1px 1px 4px 0 rgba(0, 0, 0, 0.1);
   position: fixed;
   width: 100%;
-  background-image: url('../assets/img1.jpg');
+  background-image: url("../assets/img1.jpg");
   background-size: cover;
   background-position: center;
   height: 100vh;
@@ -89,7 +130,7 @@ a {
 
 .header .logo {
   display: block;
-  font-family: 'Gochi Hand', cursive !important;
+  font-family: "Gochi Hand", cursive !important;
   float: left;
   font-size: 2.9em;
   padding: 10px 20px;
@@ -125,11 +166,11 @@ a {
 .header .menu-icon .navicon:before,
 .header .menu-icon .navicon:after {
   background: #333;
-  content: '';
+  content: "";
   display: block;
   height: 100%;
   position: absolute;
-  transition: all .2s ease-out;
+  transition: all 0.2s ease-out;
   width: 100%;
 }
 
@@ -183,7 +224,6 @@ a {
   .header .menu-icon {
     display: none;
   }
-
 }
 /*form*/
 .nav {
@@ -249,6 +289,4 @@ fieldset {
   background: #09c;
   transition: background-color 0.3s ease-in-out;
 }
-
 </style>
-
