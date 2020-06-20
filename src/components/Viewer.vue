@@ -1,30 +1,73 @@
 <template>
-
   <header class="header">
     <router-link class="logo" to="/">#studyApp</router-link>
     <input class="menu-btn" type="checkbox" id="menu-btn" />
     <label class="menu-icon" for="menu-btn"><span class="navicon"></span></label>
     <ul class="menu">
-      <li><router-link to="/Sign">Sign up</router-link></li>
+      <li><router-link to="/login">Login</router-link></li>
       <li><a href="#about">X</a></li>
       <li><a href="#careers">X</a></li>
       <li><a href="#contact">X</a></li>
     </ul>
+<div class="nav">
+  <div class="container">
+    <div class="tab">
+      <table>
+    <caption>English Summary</caption>
+    <thead>
+      <tr>
+        
+        <th scope="col">Front</th>
+        <th scope="col">Back</th>
+        <th scope="col">Status</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td data-label="Front">Dog</td>
+        <td data-label="Back">pes</td>
+        <td data-label="Amount">know</td>
+      </tr>
+      <tr>
+        <td scope="row" data-label="Front">Hello</td>
+        <td data-label="Back">Ahoj</td>
+        <td data-label="Amount">don't know</td>
+        
+      </tr>
+      <tr>
+        <td scope="row" data-label="Account">red</td>
+        <td data-label="Due Date">červený</td>
+        <td data-label="Amount">know</td>
+        
+      </tr>
+      <tr>
+        <td scope="row" data-label="Acount">black</td>
+        <td data-label="Due Date">černý</td>
+        <td data-label="Amount">know</td>
+        
+      </tr>
+    </tbody>
+  </table>
+      
+    </div>
+  </div>
+</div>
   </header>
-
 </template>
 
 <script>
 export default {
-  name: 'Viewer'
+  name: 'Sign'
 }
 </script>
+
 <style scoped>
 body {
   margin: 0;
   font-family: Lato, sans-serif;
   text-rendering: optimizeLegibility;
   box-sizing: border-box;
+  line-height: 1.25;
 }
 
 a {
@@ -32,7 +75,9 @@ a {
 }
 
 /* header */
-
+.nav {
+  margin-top: 150px;
+}
 .header {
   box-shadow: 1px 1px 4px 0 rgba(0,0,0,.1);
   position: fixed;
@@ -163,4 +208,112 @@ a {
   }
 
 }
+/*form*/
+
+.container {
+  max-width: 550px;
+  margin: 0 auto;
+  position: relative;
+  box-shadow: 0px 0px 15px 0px rgba(0, 0, 0, 0.45);
+}
+
+
+.tab {
+  background:#f3eeee7e;
+  padding: 25px;
+  margin: 50px 0;
+}
+
+.tab h3 {
+  color: #3f4954;
+  display: block;
+  text-align: center;
+  font-size: 30px;
+  font-weight: 400;
+  margin-bottom: 25px;
+}
+
+
+table {
+  border: 1px solid #ccc;
+  border-collapse: collapse;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  table-layout: fixed;
+}
+
+table caption {
+  font-size: 1.5em;
+  margin: .5em 0 .75em;
+}
+
+table tr {
+  background-color: #f8f8f8;
+  border: 1px solid #ddd;
+  padding: .35em;
+}
+
+table tr:hover {
+  background-color: rgb(175, 233, 233);
+  transition: background-color 0.3s 
+}
+table th,
+table td {
+  padding: .625em;
+  text-align: center;
+}
+
+table th {
+  font-size: .85em;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+}
+
+/*@media screen and (max-width: 600px) {
+  table {
+    border: 0;
+  }
+
+  table caption {
+    font-size: 1.3em;
+  }
+  
+  table thead {
+    border: none;
+    clip: rect(0 0 0 0);
+    height: 1px;
+    margin: -1px;
+    overflow: hidden;
+    padding: 0;
+    position: absolute;
+    width: 1px;
+  }
+  
+  table tr {
+    border-bottom: 3px solid #ddd;
+    display: block;
+    margin-bottom: .625em;
+  }
+  
+  table td {
+    border-bottom: 1px solid #ddd;
+    display: block;
+    font-size: .8em;
+    text-align: right;
+  }
+  
+  table td::before {
+    content: attr(data-label);
+    float: left;
+    font-weight: bold;
+    text-transform: uppercase;
+  }
+  
+  table td:last-child {
+    border-bottom: 0;
+  }
+}*/
+
+
 </style>
