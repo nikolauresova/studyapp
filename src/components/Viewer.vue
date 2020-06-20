@@ -90,6 +90,9 @@ export default {
           console.log(err);
         });
     },
+    editVocabulary(id) {
+      this.$router.push(`/editWord/${id}`);
+    },
   },
   created() {
     this.getVocabulary();

@@ -13,40 +13,44 @@
     </ul>
     <div class="nav">
       <div class="container">
-        <ul class="flex-card-list" v-for="deck in decks" v-bind:key="deck._id">
-          <!-- card list -->
-          <li class="flex-card-listitem">
-            <!-- card list item -->
-            <div class="flex-card">
-              <!-- card module -->
-              <h3 class="flex-card-heading">{{ deck.name }}</h3>
+        <form
+          id="word"
+          action=""
+          method="post"
+          @submit.prevent="updateVocabulary"
+        >
+          <h3>Edit word</h3>
 
-              <div class="btns">
-                <button class="flex-card-button" @click="add(deck._id)">
-                  Add
-                </button>
-                <button class="flex-card-button" @click="study">Study</button>
-                <button class="flex-card-button" @click="browser(deck._id)">
-                  Browser
-                </button>
-                <button class="flex-card-button" @click="deleteCard(deck._id)">
-                  Delete
-                </button>
-              </div>
-            </div>
-          </li>
-        </ul>
-        <ul>
-          <li class="flex-card-listitem">
-            <!-- card list item -->
-            <div class="flex-card">
-              <!-- card module -->
-              <button class="flex-card-button2" @click="createCard">
-                Create deck
-              </button>
-            </div>
-          </li>
-        </ul>
+          <fieldset>
+            <input
+              type="text"
+              placeholder="Front"
+              required
+              autofocus
+              v-model="front"
+            />
+          </fieldset>
+          <fieldset>
+            <input
+              type="text"
+              placeholder="Back"
+              v-model="back"
+              required
+              autofocus
+            />
+          </fieldset>
+
+          <fieldset>
+            <button
+              name="submit"
+              type="submit"
+              id="word-submit"
+              data-submit="Sending"
+            >
+              Submit
+            </button>
+          </fieldset>
+        </form>
       </div>
     </div>
   </header>
@@ -54,54 +58,35 @@
 
 <script>
 import axios from "axios";
-
 export default {
-  name: "Cards",
+  name: "Word",
   data() {
     return {
-      decks: [],
+      front: "",
+      back: "",
+      vocabularyId: this.$route.params.id,
     };
   },
   methods: {
-    add(id) {
-      this.$router.push(`/word/${id}`);
-    },
-    createCard() {
-      this.$router.push("/createCard");
-    },
-    deleteCard(id) {
-      // alert(this.$router.deleteCard);
+    updateVocabulary() {
       const token = localStorage.getItem("token");
+
       axios
-        .delete(`https://study-app-api.herokuapp.com/api/v1/decks/${id}`, {
-          headers: {
-            Authorization: `Bearer ${token}`,
+        .put(
+          `https://study-app-api.herokuapp.com/api/v1/vocabulary/${this.vocabularyId}`,
+          {
+            front: this.front,
+            back: this.back,
           },
-        })
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        )
         .then((resp) => {
-          console.log(`Deck with id ${id} was deleted.`);
-          this.updateDecks();
-        })
-        .catch(function(err) {
-          console.log(err);
-        });
-    },
-    study() {
-      console.log("Study");
-    },
-    browser(id) {
-      this.$router.push(`/viewer/${id}`);
-    },
-    updateDecks() {
-      const token = localStorage.getItem("token");
-      axios
-        .get("https://study-app-api.herokuapp.com/api/v1/decks/", {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        })
-        .then((resp) => {
-          this.decks = resp.data.data;
+          console.log(`Vocabulary with ${vocabularyId} was updated`);
+          location.href = "/";
         })
         .catch(function(err) {
           console.log(err);
@@ -109,7 +94,24 @@ export default {
     },
   },
   created() {
-    this.updateDecks();
+    const token = localStorage.getItem("token");
+
+    axios
+      .get(
+        `https://study-app-api.herokuapp.com/api/v1/vocabulary/${this.vocabularyId}`,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      )
+      .then((resp) => {
+        this.front = resp.data.data[0].front;
+        this.back = resp.data.data[0].back;
+      })
+      .catch(function(err) {
+        console.log(err);
+      });
   },
 };
 </script>
@@ -117,7 +119,6 @@ export default {
 <style scoped>
 body {
   margin: 0;
-  padding: 0;
   font-family: Lato, sans-serif;
   text-rendering: optimizeLegibility;
   box-sizing: border-box;
@@ -128,18 +129,15 @@ a {
 }
 
 /* header */
-.nav {
-  margin-top: 150px;
-}
 
 .header {
+  box-shadow: 1px 1px 4px 0 rgba(0, 0, 0, 0.1);
+  position: fixed;
   width: 100%;
-  z-index: 3;
   background-image: url("../assets/img1.jpg");
   background-size: cover;
   background-position: center;
   height: 100vh;
-  overflow: auto;
 }
 
 .header ul {
@@ -261,67 +259,67 @@ a {
     display: none;
   }
 }
+/*form*/
+.nav {
+  margin-top: 150px;
+}
 .container {
-  display: flex;
-  flex-flow: row wrap;
-  justify-content: center;
-}
-.flex-card-listitem {
-  padding: 18px;
-}
-
-.flex-card {
-  padding: 10px;
-  width: 280px;
-  height: 200px;
-  background: #f3eeee7e;
-  display: flex;
-  justify-content: center;
-  flex-flow: column nowrap;
+  max-width: 350px;
+  margin: 0 auto;
+  position: relative;
   box-shadow: 0px 0px 15px 0px rgba(0, 0, 0, 0.45);
 }
-.flex-card-heading {
-  /*nadpis*/
-  text-align: center;
-  font-size: 2rem;
-}
-.flex-card-button {
-  padding: 12px;
-  font-size: 16px;
-  text-decoration: none;
-  border: none;
-  color: #fff;
-  background: rgb(89, 180, 202);
-  padding: 9px;
-  text-align: center;
-  margin-top: 35px;
-  width: 35;
-  display: inline-block;
+
+#word input {
+  font: 400 12px/16px "Lato", sans-serif;
+  width: 279px;
 }
 
-.flex-card-button:hover {
-  background: #09c;
-  transition: background-color 0.3s ease-in-out;
-}
-.btns {
-  margin: 0 auto;
+#word {
+  background: #f3eeee7e;
+  padding: 25px;
+  margin: 50px 0;
 }
 
-.flex-card-button2 {
-  font-size: 16px;
-  text-decoration: none;
-  border: none;
-  color: #fff;
-  background: rgb(89, 180, 202);
-  padding: 10px;
-  text-align: center;
+#word h3 {
+  color: #3f4954;
   display: block;
-  margin-top: 20px;
-  width: 30%;
-  align-self: center;
+  text-align: center;
+  font-size: 30px;
+  font-weight: 400;
+  margin-bottom: 25px;
 }
 
-.flex-card-button2:hover {
+fieldset {
+  border: medium none !important;
+  margin: 0 0 10px;
+  min-width: 100%;
+  padding: 0;
+  width: 100%;
+}
+
+#word input {
+  border: 1px solid #ccc;
+  background: #fff;
+  margin: 0 0 5px;
+  padding: 10px;
+}
+
+#word input:hover {
+  border: 1px solid #aaa;
+}
+
+#word button {
+  cursor: pointer;
+  border: none;
+  background: rgb(75, 182, 209);
+  color: #fff;
+  padding: 10px;
+  font-size: 14px;
+  width: 100%;
+}
+
+#word button:hover {
   background: #09c;
   transition: background-color 0.3s ease-in-out;
 }

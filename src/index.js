@@ -6,6 +6,7 @@ import App from './components/App';
 import Word from './components/Word';
 import Cards from './components/Cards';
 import createCard from './components/createCard';
+import editWord from './components/editWord';
 import Sign from './components/Sign';
 import Study from './components/Study';
 import Viewer from './components/Viewer';
@@ -20,9 +21,10 @@ const router = new VueRouter({
     { path: '/word/:id', component: Word },
     { path: '/cards', component: Cards },
     { path: '/createCard', component: createCard },
+    { path: '/editWord/:id', component: editWord },
     { path: '/sign', component: Sign },
     { path: '/study', component: Study },
-    { path: '/viewer', component: Viewer },
+    { path: '/viewer/:id', component: Viewer },
     { path: '', component: Homepage },
 
   ],
