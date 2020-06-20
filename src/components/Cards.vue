@@ -22,7 +22,9 @@
               <h3 class="flex-card-heading">{{ deck.name }}</h3>
               <div class="bt">
                 <div class="btns">
-                  <button class="flex-card-button" @click="add">Add</button>
+                  <button class="flex-card-button" @click="add(deck._id)">
+                    Add
+                  </button>
                   <button class="flex-card-button" @click="study">Study</button>
                   <button class="flex-card-button" @click="browser">
                     Browser
@@ -65,11 +67,11 @@ export default {
     };
   },
   methods: {
-    add() {
-      this.$router.push("/word");
+    add(id) {
+      this.$router.push(`/word/${id}`);
     },
     createCard() {
-      this.$router.push("./createCard");
+      this.$router.push("/createCard");
     },
     deleteCard(id) {
       // alert(this.$router.deleteCard);
@@ -141,6 +143,7 @@ a {
   background-size: cover;
   background-position: center;
   height: 100vh;
+  overflow: auto;
 }
 
 .header ul {
