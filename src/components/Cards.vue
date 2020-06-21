@@ -2,14 +2,22 @@
   <header class="header">
     <router-link class="logo" to="/">#studyApp</router-link>
     <input class="menu-btn" type="checkbox" id="menu-btn" />
-    <label class="menu-icon" for="menu-btn"
-      ><span class="navicon"></span
-    ></label>
+    <label class="menu-icon" for="menu-btn">
+      <span class="navicon"></span>
+    </label>
     <ul class="menu">
-      <li><router-link to="/login">Login</router-link></li>
-      <li><a href="#about">X</a></li>
-      <li><a href="#careers">X</a></li>
-      <li><a href="#contact">X</a></li>
+      <li>
+        <router-link to="/login">Login</router-link>
+      </li>
+      <li>
+        <a href="#about">X</a>
+      </li>
+      <li>
+        <a href="#careers">X</a>
+      </li>
+      <li>
+        <a href="#contact">X</a>
+      </li>
     </ul>
     <div class="nav">
       <div class="container">
@@ -22,16 +30,43 @@
               <h3 class="flex-card-heading">{{ deck.name }}</h3>
 
               <div class="btns">
-                <button class="flex-card-button" @click="add(deck._id)">
-                  Add
-                </button>
+                <button class="flex-card-button" @click="add(deck._id)">Add</button>
                 <button class="flex-card-button" @click="study">Study</button>
-                <button class="flex-card-button" @click="browser(deck._id)">
-                  Browser
-                </button>
-                <button class="flex-card-button" @click="deleteCard(deck._id)">
-                  Delete
-                </button>
+                <button class="flex-card-button" @click="browser(deck._id)">Browser</button>
+
+                <button
+                  class="flex-card-button"
+                  onclick="document.getElementById('id01').style.display='block'"
+                  @click="openModal"
+                >Delete</button>
+
+                <div id="id01" class="modal">
+                  <span
+                    onclick="document.getElementById('id01').style.display='none'"
+                    class="close"
+                    title="Close Modal"
+                  >×</span>
+
+                  <form class="modal-content" action="/action_page.php">
+                    <div class="container">
+                      <p>Are you sure you want to delete your card?</p>
+
+                      <div class="clearfix">
+                        <button
+                          type="button"
+                          onclick="document.getElementById('id01').style.display='none'"
+                          class="cancelbtn"
+                        >Cancel</button>
+                        <button
+                          type="button"
+                          onclick="document.getElementById('id01').style.display='none'"
+                          class="deletebtn" @click="deleteCard(deck._id)"
+                        >Delete</button>
+                      </div>
+                    </div>
+                  </form>
+                </div>
+
               </div>
             </div>
           </li>
@@ -41,9 +76,7 @@
             <!-- card list item -->
             <div class="flex-card">
               <!-- card module -->
-              <button class="flex-card-button2" @click="createCard">
-                Create deck
-              </button>
+              <button class="flex-card-button2" @click="createCard">Create deck</button>
             </div>
           </li>
         </ul>
@@ -59,7 +92,7 @@ export default {
   name: "Cards",
   data() {
     return {
-      decks: [],
+      decks: []
     };
   },
   methods: {
@@ -69,8 +102,17 @@ export default {
     createCard() {
       this.$router.push("/createCard");
     },
+    openModal() {
+ var modal = document.getElementById("id01");
+      // When the user clicks anywhere outside of the modal, close it
+      window.onclick = function(event) {
+        if (event.target == modal) {
+          modal.style.display = "none";
+        }
+      };
+    },
+   
     deleteCard(id) {
-      // alert(this.$router.deleteCard);
       const token = localStorage.getItem("token");
       axios
         .delete(`https://study-app-api.herokuapp.com/api/v1/decks/${id}`, {
@@ -97,24 +139,117 @@ export default {
       axios
         .get("https://study-app-api.herokuapp.com/api/v1/decks/", {
           headers: {
-            Authorization: `Bearer ${token}`,
-          },
+            Authorization: `Bearer ${token}`
+          }
         })
-        .then((resp) => {
+        .then(resp => {
           this.decks = resp.data.data;
         })
         .catch(function(err) {
           console.log(err);
         });
-    },
+    }
   },
   created() {
     this.updateDecks();
-  },
+  }
 };
 </script>
 
 <style scoped>
+
+button {
+  color: white;
+  padding: 14px 20px;
+  margin: 8px 0;
+  border: none;
+  cursor: pointer;
+  opacity: 0.9;
+}
+
+/* Float cancel and delete buttons and add an equal width */
+.cancelbtn, .deletebtn {
+  float: left;
+  width: 50%;
+}
+
+/* Add a color to the cancel button */
+.cancelbtn {
+  background-color: #ccc;
+  color: black;
+}
+
+/* Add a color to the delete button */
+.deletebtn {
+  background-color: #f44336;
+}
+
+/* Add padding and center-align text to the container */
+.container {
+  padding: 16px;
+  text-align: center;
+}
+
+/* The Modal (background) */
+.modal {
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: #474e5d;
+  padding-top: 50px;
+}
+
+/* Modal Content/Box */
+.modal-content {
+  background-color: #fefefe;
+  margin: 5% auto 15% auto; /* 5% from the top, 15% from the bottom and centered */
+  border: 1px solid #888;
+  width: 80%; /* Could be more or less, depending on screen size */
+}
+
+/* Style the horizontal ruler */
+hr {
+  border: 1px solid #f1f1f1;
+  margin-bottom: 25px;
+}
+ 
+/* The Modal Close Button (x) */
+.close {
+  position: absolute;
+  right: 35px;
+  top: 15px;
+  font-size: 40px;
+  font-weight: bold;
+  color: #f1f1f1;
+}
+
+.close:hover,
+.close:focus {
+  color: #f44336;
+  cursor: pointer;
+}
+
+/* Clear floats */
+.clearfix::after {
+  content: "";
+  clear: both;
+  display: table;
+}
+
+/* Change styles for cancel button and delete button on extra small screens */
+@media screen and (max-width: 300px) {
+  .cancelbtn, .deletebtn {
+     width: 100%;
+  }
+}
+
+
+
 body {
   margin: 0;
   padding: 0;
@@ -284,6 +419,9 @@ a {
   /*nadpis*/
   text-align: center;
   font-size: 2rem;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 .flex-card-button {
   padding: 12px;
