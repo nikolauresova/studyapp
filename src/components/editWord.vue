@@ -58,26 +58,53 @@
 
 <script>
 import axios from "axios";
+import router from "../index";
 export default {
   name: "Word",
   data() {
     return {
       front: "",
       back: "",
+      originalFront: "",
+      originalBack: "",
       vocabularyId: this.$route.params.id,
+      deckId: "",
     };
   },
   methods: {
     updateVocabulary() {
       const token = localStorage.getItem("token");
+      let data = {};
+
+      if (
+        this.front !== this.originalFront &&
+        this.back !== this.originalBack
+      ) {
+        data = {
+          front: this.front,
+          back: this.back,
+        };
+      } else if (this.front !== this.originalFront) {
+        data = {
+          front: this.front,
+        };
+      } else if (this.back !== this.originalBack) {
+        data = {
+          front: this.back,
+        };
+      } else {
+        return alert("This vocabulary is already in database.");
+      }
+
+      const dataJSON = JSON.stringify(data);
+      console.log(dataJSON);
+      console.log(this.vocabularyId);
+      console.log(this.deckId);
 
       axios
         .put(
           `https://study-app-api.herokuapp.com/api/v1/vocabulary/${this.vocabularyId}`,
-          {
-            front: this.front,
-            back: this.back,
-          },
+          data,
           {
             headers: {
               Authorization: `Bearer ${token}`,
@@ -85,8 +112,8 @@ export default {
           }
         )
         .then((resp) => {
-          console.log(`Vocabulary with ${vocabularyId} was updated`);
-          location.href = "/";
+          console.log(`Vocabulary with ${this.vocabularyId} was updated`);
+          router.push(`/viewer/${this.deckId}`);
         })
         .catch(function(err) {
           console.log(err);
@@ -107,7 +134,10 @@ export default {
       )
       .then((resp) => {
         this.front = resp.data.data[0].front;
+        this.originalFront = resp.data.data[0].front;
         this.back = resp.data.data[0].back;
+        this.originalBack = resp.data.data[0].back;
+        this.deckId = resp.data.data[0].deck._id;
       })
       .catch(function(err) {
         console.log(err);

@@ -30,22 +30,29 @@
               <h3 class="flex-card-heading">{{ deck.name }}</h3>
 
               <div class="btns">
-                <button class="flex-card-button" @click="add(deck._id)">Add</button>
+                <button class="flex-card-button" @click="add(deck._id)">
+                  Add
+                </button>
                 <button class="flex-card-button" @click="study">Study</button>
-                <button class="flex-card-button" @click="browser(deck._id)">Browser</button>
+                <button class="flex-card-button" @click="browser(deck._id)">
+                  Browser
+                </button>
 
                 <button
                   class="flex-card-button"
                   onclick="document.getElementById('id01').style.display='block'"
-                  @click="openModal"
-                >Delete</button>
+                  @click="openModal(deck._id)"
+                >
+                  Delete
+                </button>
 
                 <div id="id01" class="modal">
                   <span
                     onclick="document.getElementById('id01').style.display='none'"
                     class="close"
                     title="Close Modal"
-                  >×</span>
+                    >×</span
+                  >
 
                   <form class="modal-content" action="/action_page.php">
                     <div class="container">
@@ -56,17 +63,21 @@
                           type="button"
                           onclick="document.getElementById('id01').style.display='none'"
                           class="cancelbtn"
-                        >Cancel</button>
+                        >
+                          Cancel
+                        </button>
                         <button
                           type="button"
                           onclick="document.getElementById('id01').style.display='none'"
-                          class="deletebtn" @click="deleteCard(deck._id)"
-                        >Delete</button>
+                          class="deletebtn"
+                          @click="deleteCard(deckToDelete)"
+                        >
+                          Delete
+                        </button>
                       </div>
                     </div>
                   </form>
                 </div>
-
               </div>
             </div>
           </li>
@@ -76,7 +87,9 @@
             <!-- card list item -->
             <div class="flex-card">
               <!-- card module -->
-              <button class="flex-card-button2" @click="createCard">Create deck</button>
+              <button class="flex-card-button2" @click="createCard">
+                Create deck
+              </button>
             </div>
           </li>
         </ul>
@@ -92,7 +105,8 @@ export default {
   name: "Cards",
   data() {
     return {
-      decks: []
+      decks: [],
+      deckToDelete: "",
     };
   },
   methods: {
@@ -102,8 +116,9 @@ export default {
     createCard() {
       this.$router.push("/createCard");
     },
-    openModal() {
- var modal = document.getElementById("id01");
+    openModal(id) {
+      var modal = document.getElementById("id01");
+      this.deckToDelete = id;
       // When the user clicks anywhere outside of the modal, close it
       window.onclick = function(event) {
         if (event.target == modal) {
@@ -111,7 +126,7 @@ export default {
         }
       };
     },
-   
+
     deleteCard(id) {
       const token = localStorage.getItem("token");
       axios
@@ -139,25 +154,24 @@ export default {
       axios
         .get("https://study-app-api.herokuapp.com/api/v1/decks/", {
           headers: {
-            Authorization: `Bearer ${token}`
-          }
+            Authorization: `Bearer ${token}`,
+          },
         })
-        .then(resp => {
+        .then((resp) => {
           this.decks = resp.data.data;
         })
         .catch(function(err) {
           console.log(err);
         });
-    }
+    },
   },
   created() {
     this.updateDecks();
-  }
+  },
 };
 </script>
 
 <style scoped>
-
 button {
   color: white;
   padding: 14px 20px;
@@ -168,7 +182,8 @@ button {
 }
 
 /* Float cancel and delete buttons and add an equal width */
-.cancelbtn, .deletebtn {
+.cancelbtn,
+.deletebtn {
   float: left;
   width: 50%;
 }
@@ -217,7 +232,7 @@ hr {
   border: 1px solid #f1f1f1;
   margin-bottom: 25px;
 }
- 
+
 /* The Modal Close Button (x) */
 .close {
   position: absolute;
@@ -243,12 +258,11 @@ hr {
 
 /* Change styles for cancel button and delete button on extra small screens */
 @media screen and (max-width: 300px) {
-  .cancelbtn, .deletebtn {
-     width: 100%;
+  .cancelbtn,
+  .deletebtn {
+    width: 100%;
   }
 }
-
-
 
 body {
   margin: 0;

@@ -48,7 +48,7 @@ export default {
   name: "Sign",
   data() {
     return {
-      deckId: "5eecc71eb6c0b61498147b89",
+      deckId: this.$route.params.id,
       vocabulary: [],
     };
   },

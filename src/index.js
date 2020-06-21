@@ -1,6 +1,6 @@
 import Vue from 'vue';
 import VueRouter from 'vue-router';
-import Homepage from './components/Homepage';
+import Homepage from './components/Homepage.vue';
 import Login from './components/Login';
 import App from './components/App';
 import Word from './components/Word';
@@ -13,7 +13,6 @@ import Viewer from './components/Viewer';
 import './index.html';
 
 Vue.use(VueRouter);
-
 const router = new VueRouter({
   mode: 'history',
   routes: [
@@ -29,6 +28,7 @@ const router = new VueRouter({
 
   ],
 });
+export default router;
 
 new Vue({
   el: '#app',

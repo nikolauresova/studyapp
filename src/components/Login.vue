@@ -55,6 +55,7 @@
 
 <script>
 import axios from "axios";
+import router from "../index";
 export default {
   name: "Login",
   data() {
@@ -73,7 +74,7 @@ export default {
         })
         .then(function(resp) {
           localStorage.setItem("token", resp.data.token);
-          location.href = "/cards";
+          router.push(`/cards`);
         })
         .catch(function(err) {
           console.log(err);
