@@ -16,13 +16,13 @@
           <!-- card list -->
           <li class="flex-card-listitem">
             <!-- card list item -->
-            
+
             <div class="flex-card">
               <div class="group">
-              <p class="repeat">Reviews: 20</p>
-              <p class="news">New: 10</p>
+                <p class="repeat">Reviews: 20</p>
+                <p class="news">New: 10</p>
               </div>
-              
+
               <!-- card module -->
               <h3 class="flex-card-heading" @dblclick="renameDeck(deck._id)">
                 {{ deck.name }}
@@ -32,7 +32,9 @@
                 <button class="flex-card-button" @click="add(deck._id)">
                   Add
                 </button>
-                <button class="flex-card-button" @click="study">Study</button>
+                <button class="flex-card-button" @click="study(deck._id)">
+                  Study
+                </button>
                 <button class="flex-card-button" @click="browser(deck._id)">
                   Browser
                 </button>
@@ -143,8 +145,8 @@ export default {
           console.log(err);
         });
     },
-    study() {
-      console.log("Study");
+    study(id) {
+      this.$router.push(`/study/${id}`);
     },
     browser(id) {
       this.$router.push(`/viewer/${id}`);
@@ -181,8 +183,8 @@ export default {
 }
 .repeat,
 .news {
-margin: 0;
-padding: 0;
+  margin: 0;
+  padding: 0;
 }
 .repeat {
   color: rgb(238, 46, 46);
@@ -209,7 +211,7 @@ button {
 /* Add a color to the cancel button */
 .cancelbtn {
   background-color: #ccc;
-  color: black;  
+  color: black;
 }
 
 /* Add a color to the delete button */

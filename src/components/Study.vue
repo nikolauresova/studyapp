@@ -63,7 +63,7 @@ export default {
   data() {
     return {
       word2: false,
-      deckId: "5eee27fd99bd460018cdac9d",
+      deckId: this.$route.params.id,
       front: "",
       back: "",
       status: "",
