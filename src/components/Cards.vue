@@ -16,7 +16,13 @@
           <!-- card list -->
           <li class="flex-card-listitem">
             <!-- card list item -->
+            
             <div class="flex-card">
+              <div class="group">
+              <p class="repeat">Reviews: 20</p>
+              <p class="news">New: 10</p>
+              </div>
+              
               <!-- card module -->
               <h3 class="flex-card-heading" @dblclick="renameDeck(deck._id)">
                 {{ deck.name }}
@@ -169,6 +175,21 @@ export default {
 </script>
 
 <style scoped>
+.group {
+  display: flex;
+  justify-content: space-between;
+}
+.repeat,
+.news {
+margin: 0;
+padding: 0;
+}
+.repeat {
+  color: rgb(238, 46, 46);
+}
+.news {
+  color: rgb(8, 146, 8);
+}
 button {
   color: white;
   padding: 14px 20px;
@@ -200,6 +221,7 @@ button {
 .container1 {
   padding: 16px;
   text-align: center;
+  width: 800px;
 }
 
 /* The Modal (background) */
@@ -221,7 +243,7 @@ button {
   background-color: #fefefe;
   margin: 5% auto 15% auto; /* 5% from the top, 15% from the bottom and centered */
   border: 1px solid #888;
-  width: 80%; /* Could be more or less, depending on screen size */
+  width: 830px; /* Could be more or less, depending on screen size */
 }
 
 /* Style the horizontal ruler */

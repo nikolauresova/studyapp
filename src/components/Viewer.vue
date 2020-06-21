@@ -31,9 +31,10 @@
                 <td data-label="Front">{{ item.front }}</td>
                 <td data-label="Back">{{ item.back }}</td>
                 <td data-label="Amount">{{ item.status }}</td>
-                <td @click="removeVocabulary(item._id)">X</td>
-                <td @click="editVocabulary(item._id)">I</td>
-                <td @click="addVocabulary()">+</td>
+                <td class="plus" @click="addVocabulary()">+</td>
+                <td class="cross" @click="removeVocabulary(item._id)">X</td>
+                <td  class="edit" @click="editVocabulary(item._id)">EDIT</td>
+                
               </tr>
             </tbody>
           </table>
@@ -108,6 +109,28 @@ export default {
 </script>
 
 <style scoped>
+.edit {
+  font-size: 13px;
+}
+.plus {
+  font-size: 16px;
+  font-weight: bold;
+}
+.cross {
+  font-size: 12px;
+  font-weight: bold;
+}
+
+.edit:hover {
+color:red;
+}
+.plus:hover {
+color:red;
+}
+.cross:hover {
+color:red;
+}
+
 body {
   margin: 0;
   font-family: Lato, sans-serif;
@@ -286,7 +309,6 @@ table caption {
 table tr {
   background-color: #f8f8f8;
   border: 1px solid #ddd;
-  padding: 0.35em;
 }
 
 table tr:hover {
@@ -295,12 +317,12 @@ table tr:hover {
 }
 table th,
 table td {
-  padding: 0.625em;
+  padding: 6px;
   text-align: center;
 }
 
 table th {
-  font-size: 0.85em;
+  font-size: 14px;
   letter-spacing: 0.1em;
   text-transform: uppercase;
 }
