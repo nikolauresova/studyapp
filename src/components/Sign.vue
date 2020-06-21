@@ -7,9 +7,6 @@
     ></label>
     <ul class="menu">
       <li><router-link to="/login">Login</router-link></li>
-      <li><a href="#about">X</a></li>
-      <li><a href="#careers">X</a></li>
-      <li><a href="#contact">X</a></li>
     </ul>
     <div class="nav">
       <div class="container">

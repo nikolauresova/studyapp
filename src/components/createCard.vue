@@ -49,6 +49,7 @@
 
 <script>
 import axios from "axios";
+import router from "../index";
 export default {
   name: "createCard",
   data() {
@@ -75,7 +76,7 @@ export default {
         .then((resp) => {
           console.log("Deck was added to database");
           this.name = "";
-          location.href = "/cards";
+          router.push("/cards");
         })
         .catch(function(err) {
           console.log(err);

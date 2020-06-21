@@ -96,11 +96,6 @@ export default {
         return alert("You have not made any changes to the vocabulary");
       }
 
-      const dataJSON = JSON.stringify(data);
-      console.log(dataJSON);
-      console.log(this.vocabularyId);
-      console.log(this.deckId);
-
       axios
         .put(
           `https://study-app-api.herokuapp.com/api/v1/vocabulary/${this.vocabularyId}`,

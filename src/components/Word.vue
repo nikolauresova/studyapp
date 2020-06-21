@@ -91,6 +91,7 @@ export default {
         })
         .catch(function(err) {
           console.log(err);
+          alert("Vocabulary already exists.");
         });
     },
   },
