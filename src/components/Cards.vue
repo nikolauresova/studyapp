@@ -7,16 +7,7 @@
     </label>
     <ul class="menu">
       <li>
-        <router-link to="/login">Login</router-link>
-      </li>
-      <li>
-        <a href="#about">X</a>
-      </li>
-      <li>
-        <a href="#careers">X</a>
-      </li>
-      <li>
-        <a href="#contact">X</a>
+        <router-link to="/logout">Logout</router-link>
       </li>
     </ul>
     <div class="nav">
@@ -27,7 +18,9 @@
             <!-- card list item -->
             <div class="flex-card">
               <!-- card module -->
-              <h3 class="flex-card-heading">{{ deck.name }}</h3>
+              <h3 class="flex-card-heading" @dblclick="renameDeck(deck._id)">
+                {{ deck.name }}
+              </h3>
 
               <div class="btns">
                 <button class="flex-card-button" @click="add(deck._id)">
@@ -100,6 +93,7 @@
 
 <script>
 import axios from "axios";
+import router from "../index";
 
 export default {
   name: "Cards",
@@ -148,6 +142,9 @@ export default {
     },
     browser(id) {
       this.$router.push(`/viewer/${id}`);
+    },
+    renameDeck(id) {
+      this.$router.push(`/renameCard/${id}`);
     },
     updateDecks() {
       const token = localStorage.getItem("token");

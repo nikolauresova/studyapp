@@ -6,39 +6,36 @@
       ><span class="navicon"></span
     ></label>
     <ul class="menu">
-      <li><router-link to="/sign">Sign up</router-link></li>
+      <li><router-link to="/login">Login</router-link></li>
+      <li><a href="#about">X</a></li>
+      <li><a href="#careers">X</a></li>
+      <li><a href="#contact">X</a></li>
     </ul>
     <div class="nav">
       <div class="container">
-        <form id="log" action="" method="post" @submit.prevent="login">
-          <h3>Login</h3>
+        <form
+          id="createCard"
+          action=""
+          method="post"
+          @submit.prevent="renameCard"
+        >
+          <h3>Change deck's name</h3>
 
           <fieldset>
             <input
-              type="email"
-              id="email"
-              value=""
-              placeholder="Your email"
-              v-model="email"
+              type="text"
+              placeholder="Name your deck"
+              id="card_input"
+              v-model="name"
               required
               autofocus
             />
           </fieldset>
           <fieldset>
-            <input
-              type="password"
-              id="password"
-              placeholder="Your password"
-              v-model="password"
-              required
-            />
-          </fieldset>
-
-          <fieldset>
             <button
               name="submit"
               type="submit"
-              id="log-submit"
+              id="card-submit"
               data-submit="Sending"
             >
               Submit
@@ -54,29 +51,64 @@
 import axios from "axios";
 import router from "../index";
 export default {
-  name: "Login",
+  name: "renameCard",
   data() {
     return {
-      email: "",
-      password: "",
-      token: localStorage.getItem("token"),
+      name: "",
+      originalName: "",
     };
   },
   methods: {
-    login() {
+    renameCard() {
+      const token = localStorage.getItem("token");
+      let data = {};
+
+      if (this.name !== this.originalName) {
+        data = {
+          name: this.name,
+        };
+      } else {
+        return alert("You have not changed the deck's name.");
+      }
+
       axios
-        .post("https://study-app-api.herokuapp.com/api/v1/auth/login", {
-          email: this.email,
-          password: this.password,
-        })
-        .then(function(resp) {
-          localStorage.setItem("token", resp.data.token);
-          router.push(`/cards`);
+        .put(
+          `https://study-app-api.herokuapp.com/api/v1/decks/${this.$route.params.id}`,
+          data,
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        )
+        .then((resp) => {
+          console.log("Deck's name was changed");
+          router.push("/cards");
         })
         .catch(function(err) {
           console.log(err);
         });
     },
+  },
+  created() {
+    const token = localStorage.getItem("token");
+
+    axios
+      .get(
+        `https://study-app-api.herokuapp.com/api/v1/decks/${this.$route.params.id}`,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      )
+      .then((resp) => {
+        this.name = resp.data.data[0].name;
+        this.originalName = resp.data.data[0].name;
+      })
+      .catch(function(err) {
+        console.log(err);
+      });
   },
 };
 </script>
@@ -94,10 +126,11 @@ a {
 }
 
 /* header */
-
+.nav {
+  margin-top: 150px;
+}
 .header {
   box-shadow: 1px 1px 4px 0 rgba(0, 0, 0, 0.1);
-  position: fixed;
   width: 100%;
   background-image: url("../assets/img1.jpg");
   background-size: cover;
@@ -225,32 +258,29 @@ a {
     display: none;
   }
 }
-/*form*/
-.nav {
-  margin-top: 150px;
-}
+
 .container {
-  max-width: 350px;
+  max-width: 400px;
   margin: 0 auto;
   position: relative;
   box-shadow: 0px 0px 15px 0px rgba(0, 0, 0, 0.45);
 }
 
-#log input {
+#createCard input {
   font: 400 12px/16px "Lato", sans-serif;
-  width: 279px;
+  max-width: 329px;
 }
 
-#log {
+#createCard {
   background: #f3eeee7e;
   padding: 25px;
   margin: 50px 0;
 }
 
-#log h3 {
+#createCard h3 {
   color: #3f4954;
-  display: block;
   text-align: center;
+  display: block;
   font-size: 30px;
   font-weight: 400;
   margin-bottom: 25px;
@@ -264,28 +294,30 @@ fieldset {
   width: 100%;
 }
 
-#log input {
+#createCard input {
+  width: 100%;
   border: 1px solid #ccc;
   background: #fff;
   margin: 0 0 5px;
   padding: 10px;
 }
 
-#log input:hover {
+#dcreateCard input:hover {
   border: 1px solid #aaa;
 }
 
-#log button {
+#createCard button {
   cursor: pointer;
   border: none;
   background: rgb(75, 182, 209);
   color: #fff;
+  margin-top: 20px;
   padding: 10px;
   font-size: 14px;
   width: 100%;
 }
 
-#log button:hover {
+#createCard button:hover {
   background: #09c;
   transition: background-color 0.3s ease-in-out;
 }

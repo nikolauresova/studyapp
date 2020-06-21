@@ -1,27 +1,25 @@
 <template>
   <div class="container">
-    
-  <header class="header">
-    <router-link class="logo" to="/">#studyApp</router-link>
-    <input class="menu-btn" type="checkbox" id="menu-btn" />
-    <label class="menu-icon" for="menu-btn"><span class="navicon"></span></label>
-    <ul class="menu">
-      <li><router-link to="/Sign">Sign up</router-link></li>
-      <li><a href="#about">X</a></li>
-      <li><a href="#careers">X</a></li>
-      <li><a href="#contact">X</a></li>
-    </ul>
-  
-<main>
-  <section class="site-title">
-    <div class="site-background">
-      <h3>Learning can be fun</h3>
-      <h1>Create cards and learn languages all over the world</h1>
-      <button class="btn" @click="login">Get started</button>
-    </div>
-  </section>
-</main>
-  </header>
+    <header class="header">
+      <router-link class="logo" to="/">#studyApp</router-link>
+      <input class="menu-btn" type="checkbox" id="menu-btn" />
+      <label class="menu-icon" for="menu-btn"
+        ><span class="navicon"></span
+      ></label>
+      <ul class="menu">
+        <li><router-link to="/Sign">Sign up</router-link></li>
+      </ul>
+
+      <main>
+        <section class="site-title">
+          <div class="site-background">
+            <h3>Learning can be fun</h3>
+            <h1>Create cards and learn languages all over the world</h1>
+            <button class="btn" @click="login">Get started</button>
+          </div>
+        </section>
+      </main>
+    </header>
 
     <router-view></router-view>
   </div>
@@ -29,17 +27,16 @@
 
 <script>
 export default {
-  name: 'Homepage',
+  name: "Homepage",
   methods: {
-    login () {
-      this.$router.push('/login');
-    }
-  }
+    login() {
+      this.$router.push("/login");
+    },
+  },
 };
 </script>
 
 <style lang="css">
-
 /*nav*/
 body {
   margin: 0;
@@ -55,10 +52,10 @@ a {
 /* header */
 
 .header {
-  box-shadow: 1px 1px 4px 0 rgba(0,0,0,.1);
+  box-shadow: 1px 1px 4px 0 rgba(0, 0, 0, 0.1);
   position: fixed;
   width: 100%;
-  background-image: url('../assets/img1.jpg');
+  background-image: url("../assets/img1.jpg");
   background-size: cover;
   background-position: center;
   height: 100vh;
@@ -89,7 +86,7 @@ a {
 
 .header .logo {
   display: block;
-  font-family: 'Gochi Hand', cursive !important;
+  font-family: "Gochi Hand", cursive !important;
   float: left;
   font-size: 2.9em;
   padding: 10px 20px;
@@ -125,11 +122,11 @@ a {
 .header .menu-icon .navicon:before,
 .header .menu-icon .navicon:after {
   background: #333;
-  content: '';
+  content: "";
   display: block;
   height: 100%;
   position: absolute;
-  transition: all .2s ease-out;
+  transition: all 0.2s ease-out;
   width: 100%;
 }
 
@@ -183,7 +180,6 @@ a {
   .header .menu-icon {
     display: none;
   }
-
 }
 
 h1 {
@@ -197,7 +193,7 @@ h3 {
 
 .btn {
   border: none;
-  border-radius:5px;
+  border-radius: 5px;
   padding: 1rem 3rem;
   font-size: 1rem;
   cursor: pointer;
@@ -215,14 +211,12 @@ main .site-title .site-background {
   color: #fff;
   padding-top: 250px;
   text-align: center;
-  text-shadow: 0 1px 2px hsla(0,0%,4%,.6);
+  text-shadow: 0 1px 2px hsla(0, 0%, 4%, 0.6);
 }
 
 main .site-title .btn {
   margin: 1.8rem;
   background: rgba(9, 185, 255, 0.788);
-  text-shadow: 0 1px 2px hsla(0,0%,4%,.6);
+  text-shadow: 0 1px 2px hsla(0, 0%, 4%, 0.6);
 }
-
-
 </style>

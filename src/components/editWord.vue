@@ -60,7 +60,7 @@
 import axios from "axios";
 import router from "../index";
 export default {
-  name: "Word",
+  name: "editWord",
   data() {
     return {
       front: "",
@@ -93,13 +93,8 @@ export default {
           front: this.back,
         };
       } else {
-        return alert("This vocabulary is already in database.");
+        return alert("You have not made any changes to the vocabulary");
       }
-
-      const dataJSON = JSON.stringify(data);
-      console.log(dataJSON);
-      console.log(this.vocabularyId);
-      console.log(this.deckId);
 
       axios
         .put(
