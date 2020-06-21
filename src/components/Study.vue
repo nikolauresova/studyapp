@@ -58,6 +58,7 @@
 
 <script>
 import axios from "axios";
+import router from "../index";
 export default {
   name: "Sign",
   data() {
@@ -70,6 +71,7 @@ export default {
       vocabularyId: "",
       data: {
         status: 1,
+        new: false,
       },
     };
   },
@@ -78,7 +80,7 @@ export default {
       this.word2 = false;
       const token = localStorage.getItem("token");
 
-      axios
+      return axios
         .get(
           `https://study-app-api.herokuapp.com/api/v1/decks/${this.deckId}/vocabulary/review`,
           {
@@ -88,34 +90,39 @@ export default {
           }
         )
         .then((resp) => {
-          this.front = resp.data.data.front;
-          this.back = resp.data.data.back;
-          this.status = resp.data.data.status;
-          this.vocabularyId = resp.data.data._id;
           console.log(resp.data.data);
+          console.log("Test");
+          if (resp.data.count === 0) {
+            router.push(`/results`);
+          } else {
+            this.front = resp.data.data.front;
+            this.back = resp.data.data.back;
+            this.status = resp.data.data.status;
+            this.vocabularyId = resp.data.data._id;
+          }
         })
         .catch(function(err) {
           console.log(err);
         });
     },
-    correctReply() {
+    async correctReply() {
       this.status++;
       console.log(this.status);
       console.log(this.data);
 
       this.data.status = this.status;
-      this.sendReply(this.data);
+      await this.sendReply(this.data);
       this.getReviews();
     },
-    incorrectReply() {
+    async incorrectReply() {
       console.log(this.status);
       console.log(this.data);
-      this.sendReply(this.data);
+      await this.sendReply(this.data);
       this.getReviews();
     },
     sendReply(data) {
       const token = localStorage.getItem("token");
-      axios
+      return axios
         .put(
           `https://study-app-api.herokuapp.com/api/v1/vocabulary/${this.vocabularyId}`,
           data,

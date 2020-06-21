@@ -33,6 +33,11 @@ export default {
       this.$router.push("/login");
     },
   },
+  mounted() {
+    if (localStorage.getItem("token")) {
+      this.$router.push("/cards");
+    }
+  },
 };
 </script>
 

@@ -19,8 +19,8 @@
 
             <div class="flex-card">
               <div class="group">
-                <p class="repeat">Reviews: 20</p>
-                <p class="news">New: 10</p>
+                <p class="repeat">Reviews: {{ deck.countReview }}</p>
+                <p class="news">New: {{ deck.countNew }}</p>
               </div>
 
               <!-- card module -->
