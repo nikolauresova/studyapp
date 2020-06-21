@@ -16,18 +16,20 @@
         <div class="tab">
           <br />
           <table>
-            <caption>
-              class dffhdh dhdfhdfh dhdhddh dhdfhdfhd dhfdhdh dhdfhdfh
+            <div class="word1">
+              class
               <hr />
-            </caption>
-
-            <caption>
+            </div>
+            
+            <div class="word1">
               třída
-            </caption>
+            </div>
 
             <button class="flex-card-button">Show answer</button>
-            <button class="buttons">know</button>
-            <button class="buttons">don't know</button>
+            <div class="imgs">
+            <img class="img_sad" src="/assets/sad.png" alt="no" width="50px">
+            <img class="img_smile" src="/assets/smile.png" alt="ok" width="50px">
+            </div>
           </table>
         </div>
       </div>
@@ -42,19 +44,12 @@ export default {
 </script>
 
 <style scoped>
-.buttons {
-  font-size: 16px;
-  text-decoration: none;
-  border: none;
-  color: #fff;
-  background: rgb(89, 180, 202);
-  padding: 9px;
-  text-align: center;
-  margin: 40px;
-  width: 33%;
+.imgs {
+  display: flex;
+  justify-content: space-around;
 }
-caption {
-  padding: 15px;
+.word1 {
+  text-align: center;
 }
 body {
   margin: 0;
@@ -96,6 +91,7 @@ a {
   background-size: cover;
   background-position: center;
   height: 100vh;
+  overflow: auto;
 }
 
 .header ul {

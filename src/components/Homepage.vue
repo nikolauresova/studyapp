@@ -62,6 +62,7 @@ a {
   background-size: cover;
   background-position: center;
   height: 100vh;
+  overflow: auto;
 }
 
 .header ul {
