@@ -29,13 +29,7 @@
             />
           </fieldset>
           <fieldset>
-            <input
-              type="text"
-              placeholder="Back"
-              v-model="back"
-              required
-              autofocus
-            />
+            <input type="text" placeholder="Back" v-model="back" required />
           </fieldset>
 
           <fieldset>

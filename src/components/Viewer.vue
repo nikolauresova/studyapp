@@ -31,10 +31,13 @@
                 <td data-label="Front">{{ item.front }}</td>
                 <td data-label="Back">{{ item.back }}</td>
                 <td data-label="Amount">{{ item.status }}</td>
-                <td class="plus" @click="addVocabulary()">+</td>
-                <td class="cross" @click="removeVocabulary(item._id)">X</td>
-                <td  class="edit" @click="editVocabulary(item._id)">EDIT</td>
-                
+                <td class="plus pointer" @click="addVocabulary()">+</td>
+                <td class="cross pointer" @click="removeVocabulary(item._id)">
+                  X
+                </td>
+                <td class="edit pointer" @click="editVocabulary(item._id)">
+                  EDIT
+                </td>
               </tr>
             </tbody>
           </table>
@@ -109,6 +112,9 @@ export default {
 </script>
 
 <style scoped>
+.pointer {
+  cursor: pointer;
+}
 .edit {
   font-size: 13px;
 }
@@ -122,13 +128,13 @@ export default {
 }
 
 .edit:hover {
-color:red;
+  color: red;
 }
 .plus:hover {
-color:red;
+  color: red;
 }
 .cross:hover {
-color:red;
+  color: red;
 }
 
 body {
@@ -288,6 +294,7 @@ a {
 
 .tab {
   background: #f3eeee7e;
+  opacity: 0.8;
   padding: 25px;
   margin: 50px 0;
 }
