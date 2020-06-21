@@ -19,6 +19,13 @@
     <div class="nav">
       <div class="container">
         <form id="word" action method="post" @submit.prevent="createVocabulary">
+          <img
+            id="backArrow"
+            src="/assets/backArrow.svg"
+            alt="backArrow"
+            width="20px"
+            @click="backToCards"
+          />
           <h3>Create word</h3>
 
           <fieldset>
@@ -31,7 +38,7 @@
           <fieldset>
             <button name="submit" type="submit" id="word-submit" data-submit="Sending">Submit</button>
           </fieldset>
-          <p id="successMessage">Vocabulary was added to deck.</p>
+          <p id="successMessage" v-show="show">Vocabulary was added to deck.</p>
         </form>
       </div>
     </div>
@@ -40,18 +47,24 @@
 
 <script>
 import axios from "axios";
+import router from "../index";
 export default {
   name: "Word",
   data() {
     return {
       front: "",
       back: "",
-      deckId: this.$route.params.id
+      deckId: this.$route.params.id,
+      show: false
     };
   },
   methods: {
+    backToCards() {
+      router.push(`/viewer/${this.deckId}`);
+    },
     showSuccessMessage() {
-      console.log("fas");
+      this.show = true;
+      setTimeout(() => (this.show = false), 1500);
     },
     createVocabulary() {
       const token = localStorage.getItem("token");
@@ -70,6 +83,7 @@ export default {
           }
         )
         .then(resp => {
+          this.showSuccessMessage();
           console.log("Vocabulary was added to database");
           this.front = "";
           this.back = "";
@@ -84,6 +98,10 @@ export default {
 </script>
 
 <style scoped>
+#backArrow {
+  margin-left: 90%;
+}
+
 #successMessage {
   color: green;
   font-weight: bold;
