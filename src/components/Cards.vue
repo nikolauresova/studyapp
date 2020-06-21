@@ -37,7 +37,7 @@
                 <button
                   class="flex-card-button"
                   onclick="document.getElementById('id01').style.display='block'"
-                  @click="deleteCard(deck._id)"
+                  @click="openModal"
                 >Delete</button>
 
                 <div id="id01" class="modal">
@@ -60,7 +60,7 @@
                         <button
                           type="button"
                           onclick="document.getElementById('id01').style.display='none'"
-                          class="deletebtn"
+                          class="deletebtn" @click="deleteCard(deck._id)"
                         >Delete</button>
                       </div>
                     </div>
@@ -102,17 +102,18 @@ export default {
     createCard() {
       this.$router.push("/createCard");
     },
-    deleteCard(id) {
-      var modal = document.getElementById("id01");
-
+    openModal() {
+ var modal = document.getElementById("id01");
       // When the user clicks anywhere outside of the modal, close it
       window.onclick = function(event) {
         if (event.target == modal) {
           modal.style.display = "none";
         }
       };
-
-      /*const token = localStorage.getItem("token");
+    },
+   
+    deleteCard(id) {
+      const token = localStorage.getItem("token");
       axios
         .delete(`https://study-app-api.herokuapp.com/api/v1/decks/${id}`, {
           headers: {
@@ -125,7 +126,7 @@ export default {
         })
         .catch(function(err) {
           console.log(err);
-        });*/
+        });
     },
     study() {
       console.log("Study");
