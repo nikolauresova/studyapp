@@ -7,16 +7,10 @@
     </label>
     <ul class="menu">
       <li>
-        <router-link to="/login">Login</router-link>
+        <router-link to="/logout">Logout</router-link>
       </li>
       <li>
-        <a href="#about">X</a>
-      </li>
-      <li>
-        <a href="#careers">X</a>
-      </li>
-      <li>
-        <a href="#contact">X</a>
+        <router-link to="/cards">Cards</router-link>
       </li>
     </ul>
     <div class="nav">
@@ -25,17 +19,35 @@
           <br />
           <table>
             <div class="word1">
-              classes
+              {{ front }}
               <hr />
             </div>
 
-            <div class="word1" v-show="word2">třídy</div>
+            <div class="word1" v-show="word2">{{ back }}</div>
 
-            <button class="flex-card-button" @click="word2 = !word2" v-show="!word2">Show answer</button>
+            <button
+              class="flex-card-button"
+              @click="word2 = !word2"
+              v-show="!word2"
+            >
+              Show answer
+            </button>
 
-            <div class="imgs" v-show="word2" >
-              <img class="img_sad" src="/assets/sad.png" alt="no" width="50px" />
-              <img class="img_smile" src="/assets/smile.png" alt="ok" width="50px" />
+            <div class="imgs" v-show="word2">
+              <img
+                class="img_sad"
+                src="/assets/sad.png"
+                alt="no"
+                width="50px"
+                @click="correctReply"
+              />
+              <img
+                class="img_smile"
+                src="/assets/smile.png"
+                alt="ok"
+                width="50px"
+                @click="incorrectReply"
+              />
             </div>
           </table>
         </div>
@@ -45,13 +57,84 @@
 </template>
 
 <script>
+import axios from "axios";
 export default {
   name: "Sign",
   data() {
     return {
-      word2: false
+      word2: false,
+      deckId: "5eee27fd99bd460018cdac9d",
+      front: "",
+      back: "",
+      status: "",
+      vocabularyId: "",
+      data: {
+        status: 1,
+      },
     };
-  }
+  },
+  methods: {
+    getReviews() {
+      this.word2 = false;
+      const token = localStorage.getItem("token");
+
+      axios
+        .get(
+          `https://study-app-api.herokuapp.com/api/v1/decks/${this.deckId}/vocabulary/review`,
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        )
+        .then((resp) => {
+          this.front = resp.data.data.front;
+          this.back = resp.data.data.back;
+          this.status = resp.data.data.status;
+          this.vocabularyId = resp.data.data._id;
+          console.log(resp.data.data);
+        })
+        .catch(function(err) {
+          console.log(err);
+        });
+    },
+    correctReply() {
+      this.status++;
+      console.log(this.status);
+
+      this.data.status = this.status;
+      this.sendReply(this.data);
+      this.getReviews();
+    },
+    incorrectReply() {
+      this.sendReply(this.data);
+      this.getReviews();
+    },
+    sendReply(data) {
+      const token = localStorage.getItem("token");
+      axios
+        .put(
+          `https://study-app-api.herokuapp.com/api/v1/vocabulary/${this.vocabularyId}`,
+          {
+            data,
+          },
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        )
+        .then((resp) => {
+          console.log(`Vocabulary with ${this.vocabularyId} was updated`);
+        })
+        .catch(function(err) {
+          console.log(err);
+        });
+    },
+  },
+  created() {
+    this.getReviews();
+  },
 };
 </script>
 
