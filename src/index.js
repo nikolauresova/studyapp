@@ -28,7 +28,7 @@ const router = new VueRouter({
     { path: '/renameCard/:id', component: renameCard },
     { path: '/editWord/:id', component: editWord },
     { path: '/sign', component: Sign },
-    { path: '/study', component: Study },
+    { path: '/study/:id', component: Study },
     { path: '/viewer/:id', component: Viewer },
     { path: '', component: Homepage },
     { path: '/results', component: Results },
