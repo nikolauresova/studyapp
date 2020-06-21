@@ -48,7 +48,7 @@
                   >
 
                   <form class="modal-content" action="/action_page.php">
-                    <div class="container">
+                    <div class="container1">
                       <p>Are you sure you want to delete your card?</p>
 
                       <div class="clearfix">
@@ -188,7 +188,7 @@ button {
 /* Add a color to the cancel button */
 .cancelbtn {
   background-color: #ccc;
-  color: black;
+  color: black;  
 }
 
 /* Add a color to the delete button */
@@ -197,7 +197,7 @@ button {
 }
 
 /* Add padding and center-align text to the container */
-.container {
+.container1 {
   padding: 16px;
   text-align: center;
 }
