@@ -2,14 +2,22 @@
   <header class="header">
     <router-link class="logo" to="/">#studyApp</router-link>
     <input class="menu-btn" type="checkbox" id="menu-btn" />
-    <label class="menu-icon" for="menu-btn"
-      ><span class="navicon"></span
-    ></label>
+    <label class="menu-icon" for="menu-btn">
+      <span class="navicon"></span>
+    </label>
     <ul class="menu">
-      <li><router-link to="/login">Login</router-link></li>
-      <li><a href="#about">X</a></li>
-      <li><a href="#careers">X</a></li>
-      <li><a href="#contact">X</a></li>
+      <li>
+        <router-link to="/login">Login</router-link>
+      </li>
+      <li>
+        <a href="#about">X</a>
+      </li>
+      <li>
+        <a href="#careers">X</a>
+      </li>
+      <li>
+        <a href="#contact">X</a>
+      </li>
     </ul>
     <div class="nav">
       <div class="container">
@@ -17,18 +25,17 @@
           <br />
           <table>
             <div class="word1">
-              class
+              classes
               <hr />
             </div>
-            
-            <div class="word1">
-              třída
-            </div>
 
-            <button class="flex-card-button">Show answer</button>
-            <div class="imgs">
-            <img class="img_sad" src="/assets/sad.png" alt="no" width="50px">
-            <img class="img_smile" src="/assets/smile.png" alt="ok" width="50px">
+            <div class="word1" v-show="word2">třídy</div>
+
+            <button class="flex-card-button" @click="word2 = !word2" v-show="!word2">Show answer</button>
+
+            <div class="imgs" v-show="word2" >
+              <img class="img_sad" src="/assets/sad.png" alt="no" width="50px" />
+              <img class="img_smile" src="/assets/smile.png" alt="ok" width="50px" />
             </div>
           </table>
         </div>
@@ -40,16 +47,44 @@
 <script>
 export default {
   name: "Sign",
+  data() {
+    return {
+      word2: false
+    };
+  }
 };
 </script>
 
 <style scoped>
+.tab {
+  background: #f3eeee7e;
+  padding: 25px;
+  margin: 50px 0;
+}
+
+table {
+  border-collapse: collapse;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+}
+
+table caption {
+  font-size: 1.5em;
+  margin: 0.5em 0 0.75em;
+}
+
 .imgs {
   display: flex;
   justify-content: space-around;
 }
 .word1 {
   text-align: center;
+  font-size: 35px;
+}
+.word2 {
+  text-align: center;
+  font-size: 35px;
 }
 body {
   margin: 0;
@@ -220,22 +255,5 @@ a {
   margin: 0 auto;
   position: relative;
   box-shadow: 0px 0px 15px 0px rgba(0, 0, 0, 0.45);
-}
-.tab {
-  background: #f3eeee7e;
-  padding: 25px;
-  margin: 50px 0;
-}
-
-table {
-  border-collapse: collapse;
-  margin: 0;
-  padding: 0;
-  width: 100%;
-}
-
-table caption {
-  font-size: 1.5em;
-  margin: 0.5em 0 0.75em;
 }
 </style>
