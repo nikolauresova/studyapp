@@ -7,18 +7,15 @@
         ><span class="navicon"></span
       ></label>
       <ul class="menu">
-        <li><router-link to="/Sign">Sign up</router-link></li>
+        <li><router-link to="/logout">Logout</router-link></li>
+        <li><router-link to="/cards">Cards</router-link></li>
       </ul>
 
       <main>
         <section class="site-title">
           <div class="site-background">
-          <img 
-          src="/assets/check.png"
-          class="check"
-          width="280px"
-          >
-            
+            <img src="/assets/check.png" class="check" width="280px" />
+
             <h1>Well done, friend!</h1>
             <button class="btn" @click="cards">Back to Cards</button>
           </div>
@@ -200,7 +197,7 @@ h3 {
 .btn {
   border: none;
   border-radius: 5px;
-  padding:  16px 25px;
+  padding: 16px 25px;
   font-size: 1rem;
   cursor: pointer;
   color: white;

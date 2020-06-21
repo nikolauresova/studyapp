@@ -6,10 +6,8 @@
       ><span class="navicon"></span
     ></label>
     <ul class="menu">
-      <li><router-link to="/login">Login</router-link></li>
-      <li><a href="#about">X</a></li>
-      <li><a href="#careers">X</a></li>
-      <li><a href="#contact">X</a></li>
+      <li><router-link to="/logout">Logout</router-link></li>
+      <li><router-link to="/cards">Cards</router-link></li>
     </ul>
     <div class="nav">
       <div class="container">
@@ -90,7 +88,7 @@ export default {
         };
       } else if (this.back !== this.originalBack) {
         data = {
-          front: this.back,
+          back: this.back,
         };
       } else {
         return alert("You have not made any changes to the vocabulary");

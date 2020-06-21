@@ -41,6 +41,7 @@
               placeholder="Your password"
               v-model="password"
               required
+              minlength="6"
             />
           </fieldset>
 
