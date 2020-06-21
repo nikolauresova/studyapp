@@ -2,32 +2,30 @@
   <header class="header">
     <router-link class="logo" to="/">#studyApp</router-link>
     <input class="menu-btn" type="checkbox" id="menu-btn" />
-    <label class="menu-icon" for="menu-btn"
-      ><span class="navicon"></span
-    ></label>
+    <label class="menu-icon" for="menu-btn">
+      <span class="navicon"></span>
+    </label>
     <ul class="menu">
-      <li><router-link to="/login">Login</router-link></li>
+      <li>
+        <router-link to="/login">Login</router-link>
+      </li>
+      <li>
+        <router-link to="/about">About</router-link>
+      </li>
     </ul>
     <div class="nav">
       <div class="container">
-        <form id="sign" action="" method="post" @submit.prevent="signUp">
+        <form id="sign" action method="post" @submit.prevent="signUp">
           <h3>Sign up</h3>
 
           <fieldset>
-            <input
-              type="text"
-              id="name"
-              placeholder="Your name"
-              v-model="name"
-              required
-              autofocus
-            />
+            <input type="text" id="name" placeholder="Your name" v-model="name" required autofocus />
           </fieldset>
           <fieldset>
             <input
               type="email"
               id="email"
-              value=""
+              value
               placeholder="Your e-mail"
               v-model="email"
               required
@@ -46,14 +44,7 @@
           </fieldset>
 
           <fieldset>
-            <button
-              name="submit"
-              type="submit"
-              id="sign-submit"
-              data-submit="Sending"
-            >
-              Submit
-            </button>
+            <button name="submit" type="submit" id="sign-submit" data-submit="Sending">Submit</button>
           </fieldset>
         </form>
       </div>
@@ -71,7 +62,7 @@ export default {
       name: "",
       email: "",
       password: "",
-      token: localStorage.getItem("token"),
+      token: localStorage.getItem("token")
     };
   },
   methods: {
@@ -80,7 +71,7 @@ export default {
         .post("https://study-app-api.herokuapp.com/api/v1/auth/register", {
           name: this.name,
           email: this.email,
-          password: this.password,
+          password: this.password
         })
         .then(function(resp) {
           localStorage.setItem("token", resp.data.token);
@@ -89,8 +80,8 @@ export default {
         .catch(function(err) {
           console.log(err);
         });
-    },
-  },
+    }
+  }
 };
 </script>
 

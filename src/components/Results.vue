@@ -3,12 +3,19 @@
     <header class="header">
       <router-link class="logo" to="/">#studyApp</router-link>
       <input class="menu-btn" type="checkbox" id="menu-btn" />
-      <label class="menu-icon" for="menu-btn"
-        ><span class="navicon"></span
-      ></label>
+      <label class="menu-icon" for="menu-btn">
+        <span class="navicon"></span>
+      </label>
       <ul class="menu">
-        <li><router-link to="/logout">Logout</router-link></li>
-        <li><router-link to="/cards">Cards</router-link></li>
+        <li>
+          <router-link to="/logout">Logout</router-link>
+        </li>
+        <li>
+          <router-link to="/cards">Cards</router-link>
+        </li>
+        <li>
+          <router-link to="/about">About</router-link>
+        </li>
       </ul>
 
       <main>
@@ -33,8 +40,8 @@ export default {
   methods: {
     cards() {
       this.$router.push("/cards");
-    },
-  },
+    }
+  }
 };
 </script>
 

@@ -2,45 +2,34 @@
   <header class="header">
     <router-link class="logo" to="/">#studyApp</router-link>
     <input class="menu-btn" type="checkbox" id="menu-btn" />
-    <label class="menu-icon" for="menu-btn"
-      ><span class="navicon"></span
-    ></label>
+    <label class="menu-icon" for="menu-btn">
+      <span class="navicon"></span>
+    </label>
     <ul class="menu">
-      <li><router-link to="/logout">Logout</router-link></li>
-      <li><router-link to="/cards">Cards</router-link></li>
+      <li>
+        <router-link to="/logout">Logout</router-link>
+      </li>
+      <li>
+        <router-link to="/cards">Cards</router-link>
+      </li>
+      <li>
+        <router-link to="/about">About</router-link>
+      </li>
     </ul>
     <div class="nav">
       <div class="container">
-        <form
-          id="word"
-          action=""
-          method="post"
-          @submit.prevent="updateVocabulary"
-        >
+        <form id="word" action method="post" @submit.prevent="updateVocabulary">
           <h3>Edit word</h3>
 
           <fieldset>
-            <input
-              type="text"
-              placeholder="Front"
-              required
-              autofocus
-              v-model="front"
-            />
+            <input type="text" placeholder="Front" required autofocus v-model="front" />
           </fieldset>
           <fieldset>
             <input type="text" placeholder="Back" v-model="back" required />
           </fieldset>
 
           <fieldset>
-            <button
-              name="submit"
-              type="submit"
-              id="word-submit"
-              data-submit="Sending"
-            >
-              Submit
-            </button>
+            <button name="submit" type="submit" id="word-submit" data-submit="Sending">Submit</button>
           </fieldset>
         </form>
       </div>
@@ -60,7 +49,7 @@ export default {
       originalFront: "",
       originalBack: "",
       vocabularyId: this.$route.params.id,
-      deckId: "",
+      deckId: ""
     };
   },
   methods: {
@@ -74,15 +63,15 @@ export default {
       ) {
         data = {
           front: this.front,
-          back: this.back,
+          back: this.back
         };
       } else if (this.front !== this.originalFront) {
         data = {
-          front: this.front,
+          front: this.front
         };
       } else if (this.back !== this.originalBack) {
         data = {
-          back: this.back,
+          back: this.back
         };
       } else {
         return alert("You have not made any changes to the vocabulary");
@@ -94,18 +83,18 @@ export default {
           data,
           {
             headers: {
-              Authorization: `Bearer ${token}`,
-            },
+              Authorization: `Bearer ${token}`
+            }
           }
         )
-        .then((resp) => {
+        .then(resp => {
           console.log(`Vocabulary with ${this.vocabularyId} was updated`);
           router.push(`/viewer/${this.deckId}`);
         })
         .catch(function(err) {
           console.log(err);
         });
-    },
+    }
   },
   created() {
     const token = localStorage.getItem("token");
@@ -115,11 +104,11 @@ export default {
         `https://study-app-api.herokuapp.com/api/v1/vocabulary/${this.vocabularyId}`,
         {
           headers: {
-            Authorization: `Bearer ${token}`,
-          },
+            Authorization: `Bearer ${token}`
+          }
         }
       )
-      .then((resp) => {
+      .then(resp => {
         this.front = resp.data.data[0].front;
         this.originalFront = resp.data.data[0].front;
         this.back = resp.data.data[0].back;
@@ -129,7 +118,7 @@ export default {
       .catch(function(err) {
         console.log(err);
       });
-  },
+  }
 };
 </script>
 

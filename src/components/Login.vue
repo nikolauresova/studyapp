@@ -2,22 +2,28 @@
   <header class="header">
     <router-link class="logo" to="/">#studyApp</router-link>
     <input class="menu-btn" type="checkbox" id="menu-btn" />
-    <label class="menu-icon" for="menu-btn"
-      ><span class="navicon"></span
-    ></label>
+    <label class="menu-icon" for="menu-btn">
+      <span class="navicon"></span>
+    </label>
     <ul class="menu">
-      <li><router-link to="/sign">Sign up</router-link></li>
+      <li>
+        <router-link to="/sign">Sign up</router-link>
+      </li>
+
+      <li>
+        <router-link to="/about">About</router-link>
+      </li>
     </ul>
     <div class="nav">
       <div class="container">
-        <form id="log" action="" method="post" @submit.prevent="login">
+        <form id="log" action method="post" @submit.prevent="login">
           <h3>Login</h3>
 
           <fieldset>
             <input
               type="email"
               id="email"
-              value=""
+              value
               placeholder="Your email"
               v-model="email"
               required
@@ -35,14 +41,7 @@
           </fieldset>
 
           <fieldset>
-            <button
-              name="submit"
-              type="submit"
-              id="log-submit"
-              data-submit="Sending"
-            >
-              Submit
-            </button>
+            <button name="submit" type="submit" id="log-submit" data-submit="Sending">Submit</button>
           </fieldset>
         </form>
       </div>
@@ -59,7 +58,7 @@ export default {
     return {
       email: "",
       password: "",
-      token: localStorage.getItem("token"),
+      token: localStorage.getItem("token")
     };
   },
   methods: {
@@ -67,7 +66,7 @@ export default {
       axios
         .post("https://study-app-api.herokuapp.com/api/v1/auth/login", {
           email: this.email,
-          password: this.password,
+          password: this.password
         })
         .then(function(resp) {
           localStorage.setItem("token", resp.data.token);
@@ -76,8 +75,8 @@ export default {
         .catch(function(err) {
           console.log(err);
         });
-    },
-  },
+    }
+  }
 };
 </script>
 

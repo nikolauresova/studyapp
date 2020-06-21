@@ -2,21 +2,23 @@
   <header class="header">
     <router-link class="logo" to="/">#studyApp</router-link>
     <input class="menu-btn" type="checkbox" id="menu-btn" />
-    <label class="menu-icon" for="menu-btn"
-      ><span class="navicon"></span
-    ></label>
+    <label class="menu-icon" for="menu-btn">
+      <span class="navicon"></span>
+    </label>
     <ul class="menu">
-      <li><router-link to="/logout">Logout</router-link></li>
-      <li><router-link to="/cards">Cards</router-link></li>
+      <li>
+        <router-link to="/logout">Logout</router-link>
+      </li>
+      <li>
+        <router-link to="/cards">Cards</router-link>
+      </li>
+      <li>
+        <router-link to="/about">About</router-link>
+      </li>
     </ul>
     <div class="nav">
       <div class="container">
-        <form
-          id="createCard"
-          action=""
-          method="post"
-          @submit.prevent="createCard"
-        >
+        <form id="createCard" action method="post" @submit.prevent="createCard">
           <h3>Create deck</h3>
 
           <fieldset>
@@ -30,14 +32,7 @@
             />
           </fieldset>
           <fieldset>
-            <button
-              name="submit"
-              type="submit"
-              id="card-submit"
-              data-submit="Sending"
-            >
-              Submit
-            </button>
+            <button name="submit" type="submit" id="card-submit" data-submit="Sending">Submit</button>
           </fieldset>
         </form>
       </div>
@@ -52,7 +47,7 @@ export default {
   name: "createCard",
   data() {
     return {
-      name: "",
+      name: ""
     };
   },
   methods: {
@@ -63,24 +58,25 @@ export default {
         .post(
           "https://study-app-api.herokuapp.com/api/v1/decks/",
           {
-            name: this.name,
+            name: this.name
           },
           {
             headers: {
-              Authorization: `Bearer ${token}`,
-            },
+              Authorization: `Bearer ${token}`
+            }
           }
         )
-        .then((resp) => {
+        .then(resp => {
           console.log("Deck was added to database");
           this.name = "";
           router.push("/cards");
         })
         .catch(function(err) {
           console.log(err);
+          alert("Vocabulary already exists.");
         });
-    },
-  },
+    }
+  }
 };
 </script>
 

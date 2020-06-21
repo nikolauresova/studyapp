@@ -2,12 +2,19 @@
   <header class="header">
     <router-link class="logo" to="/">#studyApp</router-link>
     <input class="menu-btn" type="checkbox" id="menu-btn" />
-    <label class="menu-icon" for="menu-btn"
-      ><span class="navicon"></span
-    ></label>
+    <label class="menu-icon" for="menu-btn">
+      <span class="navicon"></span>
+    </label>
     <ul class="menu">
-      <li><router-link to="/logout">Logout</router-link></li>
-      <li><router-link to="/cards">Cards</router-link></li>
+      <li>
+        <router-link to="/logout">Logout</router-link>
+      </li>
+      <li>
+        <router-link to="/cards">Cards</router-link>
+      </li>
+      <li>
+        <router-link to="/about">About</router-link>
+      </li>
     </ul>
     <div class="nav">
       <div class="container">
@@ -15,7 +22,7 @@
           <table>
             <caption>
               {{
-                deckName
+              deckName
               }}
             </caption>
             <thead>
@@ -32,12 +39,8 @@
                 <td data-label="Back">{{ item.back }}</td>
                 <td data-label="Amount">{{ item.status }}</td>
                 <td class="plus pointer" @click="addVocabulary()">+</td>
-                <td class="cross pointer" @click="removeVocabulary(item._id)">
-                  X
-                </td>
-                <td class="edit pointer" @click="editVocabulary(item._id)">
-                  EDIT
-                </td>
+                <td class="cross pointer" @click="removeVocabulary(item._id)">X</td>
+                <td class="edit pointer" @click="editVocabulary(item._id)">EDIT</td>
               </tr>
             </tbody>
           </table>
@@ -56,7 +59,7 @@ export default {
     return {
       deckId: this.$route.params.id,
       deckName: "Deck",
-      vocabulary: [],
+      vocabulary: []
     };
   },
   methods: {
@@ -71,11 +74,11 @@ export default {
           `https://study-app-api.herokuapp.com/api/v1/decks/${this.deckId}/vocabulary`,
           {
             headers: {
-              Authorization: `Bearer ${token}`,
-            },
+              Authorization: `Bearer ${token}`
+            }
           }
         )
-        .then((resp) => {
+        .then(resp => {
           this.vocabulary = resp.data.data;
           this.deckName = resp.data.data[0].deck.name;
           console.log(this.vocabulary);
@@ -90,10 +93,10 @@ export default {
       axios
         .delete(`https://study-app-api.herokuapp.com/api/v1/vocabulary/${id}`, {
           headers: {
-            Authorization: `Bearer ${token}`,
-          },
+            Authorization: `Bearer ${token}`
+          }
         })
-        .then((resp) => {
+        .then(resp => {
           console.log(`Vocabulary with id ${id} was deleted.`);
           this.getVocabulary();
         })
@@ -103,11 +106,11 @@ export default {
     },
     editVocabulary(id) {
       this.$router.push(`/editWord/${id}`);
-    },
+    }
   },
   created() {
     this.getVocabulary();
-  },
+  }
 };
 </script>
 

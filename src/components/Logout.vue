@@ -2,12 +2,19 @@
   <header class="header">
     <router-link class="logo" to="/">#studyApp</router-link>
     <input class="menu-btn" type="checkbox" id="menu-btn" />
-    <label class="menu-icon" for="menu-btn"
-      ><span class="navicon"></span
-    ></label>
+    <label class="menu-icon" for="menu-btn">
+      <span class="navicon"></span>
+    </label>
     <ul class="menu">
-      <li><router-link to="/sign">Sign up</router-link></li>
-      <li><router-link to="/login">Log in</router-link></li>
+      <li>
+        <router-link to="/sign">Sign up</router-link>
+      </li>
+      <li>
+        <router-link to="/login">Log in</router-link>
+      </li>
+      <li>
+        <router-link to="/about">About</router-link>
+      </li>
     </ul>
     <div class="nav">
       <div class="container">
@@ -25,7 +32,7 @@ export default {
   name: "Logout",
   created() {
     localStorage.removeItem("token");
-  },
+  }
 };
 </script>
 

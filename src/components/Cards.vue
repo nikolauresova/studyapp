@@ -9,6 +9,9 @@
       <li>
         <router-link to="/logout">Logout</router-link>
       </li>
+      <li>
+        <router-link to="/about">About</router-link>
+      </li>
     </ul>
     <div class="nav">
       <div class="container">
@@ -24,36 +27,25 @@
               </div>
 
               <!-- card module -->
-              <h3 class="flex-card-heading" @dblclick="renameDeck(deck._id)">
-                {{ deck.name }}
-              </h3>
+              <h3 class="flex-card-heading" @dblclick="renameDeck(deck._id)">{{ deck.name }}</h3>
 
               <div class="btns">
-                <button class="flex-card-button" @click="add(deck._id)">
-                  Add
-                </button>
-                <button class="flex-card-button" @click="study(deck._id)">
-                  Study
-                </button>
-                <button class="flex-card-button" @click="browser(deck._id)">
-                  Browser
-                </button>
+                <button class="flex-card-button" @click="add(deck._id)">Add</button>
+                <button class="flex-card-button" @click="study(deck._id)">Study</button>
+                <button class="flex-card-button" @click="browser(deck._id)">Browser</button>
 
                 <button
                   class="flex-card-button"
                   onclick="document.getElementById('id01').style.display='block'"
                   @click="openModal(deck._id)"
-                >
-                  Delete
-                </button>
+                >Delete</button>
 
                 <div id="id01" class="modal">
                   <span
                     onclick="document.getElementById('id01').style.display='none'"
                     class="close"
                     title="Close Modal"
-                    >×</span
-                  >
+                  >×</span>
 
                   <form class="modal-content" action="/action_page.php">
                     <div class="container1">
@@ -64,17 +56,13 @@
                           type="button"
                           onclick="document.getElementById('id01').style.display='none'"
                           class="cancelbtn"
-                        >
-                          Cancel
-                        </button>
+                        >Cancel</button>
                         <button
                           type="button"
                           onclick="document.getElementById('id01').style.display='none'"
                           class="deletebtn"
                           @click="deleteCard(deckToDelete)"
-                        >
-                          Delete
-                        </button>
+                        >Delete</button>
                       </div>
                     </div>
                   </form>
@@ -88,9 +76,7 @@
             <!-- card list item -->
             <div class="flex-card">
               <!-- card module -->
-              <button class="flex-card-button2" @click="createCard">
-                Create deck
-              </button>
+              <button class="flex-card-button2" @click="createCard">Create deck</button>
             </div>
           </li>
         </ul>
@@ -108,7 +94,7 @@ export default {
   data() {
     return {
       decks: [],
-      deckToDelete: "",
+      deckToDelete: ""
     };
   },
   methods: {
@@ -134,10 +120,10 @@ export default {
       axios
         .delete(`https://study-app-api.herokuapp.com/api/v1/decks/${id}`, {
           headers: {
-            Authorization: `Bearer ${token}`,
-          },
+            Authorization: `Bearer ${token}`
+          }
         })
-        .then((resp) => {
+        .then(resp => {
           console.log(`Deck with id ${id} was deleted.`);
           this.updateDecks();
         })
@@ -159,20 +145,20 @@ export default {
       axios
         .get("https://study-app-api.herokuapp.com/api/v1/decks/", {
           headers: {
-            Authorization: `Bearer ${token}`,
-          },
+            Authorization: `Bearer ${token}`
+          }
         })
-        .then((resp) => {
+        .then(resp => {
           this.decks = resp.data.data;
         })
         .catch(function(err) {
           console.log(err);
         });
-    },
+    }
   },
   created() {
     this.updateDecks();
-  },
+  }
 };
 </script>
 

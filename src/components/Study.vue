@@ -12,6 +12,9 @@
       <li>
         <router-link to="/cards">Cards</router-link>
       </li>
+      <li>
+        <router-link to="/about">About</router-link>
+      </li>
     </ul>
     <div class="nav">
       <div class="container">
@@ -25,13 +28,7 @@
 
             <div class="word1" v-show="word2">{{ back }}</div>
 
-            <button
-              class="flex-card-button"
-              @click="word2 = !word2"
-              v-show="!word2"
-            >
-              Show answer
-            </button>
+            <button class="flex-card-button" @click="word2 = !word2" v-show="!word2">Show answer</button>
 
             <div class="imgs" v-show="word2">
               <img
@@ -71,8 +68,8 @@ export default {
       vocabularyId: "",
       data: {
         status: 1,
-        new: false,
-      },
+        new: false
+      }
     };
   },
   methods: {
@@ -85,11 +82,11 @@ export default {
           `https://study-app-api.herokuapp.com/api/v1/decks/${this.deckId}/vocabulary/review`,
           {
             headers: {
-              Authorization: `Bearer ${token}`,
-            },
+              Authorization: `Bearer ${token}`
+            }
           }
         )
-        .then((resp) => {
+        .then(resp => {
           console.log(resp.data.data);
           console.log("Test");
           if (resp.data.count === 0) {
@@ -128,21 +125,21 @@ export default {
           data,
           {
             headers: {
-              Authorization: `Bearer ${token}`,
-            },
+              Authorization: `Bearer ${token}`
+            }
           }
         )
-        .then((resp) => {
+        .then(resp => {
           console.log(`Vocabulary with ${this.vocabularyId} was updated`);
         })
         .catch(function(err) {
           console.log(err);
         });
-    },
+    }
   },
   created() {
     this.getReviews();
-  },
+  }
 };
 </script>
 

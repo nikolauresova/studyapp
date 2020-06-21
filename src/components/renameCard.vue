@@ -2,21 +2,23 @@
   <header class="header">
     <router-link class="logo" to="/">#studyApp</router-link>
     <input class="menu-btn" type="checkbox" id="menu-btn" />
-    <label class="menu-icon" for="menu-btn"
-      ><span class="navicon"></span
-    ></label>
+    <label class="menu-icon" for="menu-btn">
+      <span class="navicon"></span>
+    </label>
     <ul class="menu">
-      <li><router-link to="/logout">Logout</router-link></li>
-      <li><router-link to="/cards">Cards</router-link></li>
+      <li>
+        <router-link to="/logout">Logout</router-link>
+      </li>
+      <li>
+        <router-link to="/cards">Cards</router-link>
+      </li>
+      <li>
+        <router-link to="/about">About</router-link>
+      </li>
     </ul>
     <div class="nav">
       <div class="container">
-        <form
-          id="createCard"
-          action=""
-          method="post"
-          @submit.prevent="renameCard"
-        >
+        <form id="createCard" action method="post" @submit.prevent="renameCard">
           <h3>Change deck's name</h3>
 
           <fieldset>
@@ -30,14 +32,7 @@
             />
           </fieldset>
           <fieldset>
-            <button
-              name="submit"
-              type="submit"
-              id="card-submit"
-              data-submit="Sending"
-            >
-              Submit
-            </button>
+            <button name="submit" type="submit" id="card-submit" data-submit="Sending">Submit</button>
           </fieldset>
         </form>
       </div>
@@ -53,7 +48,7 @@ export default {
   data() {
     return {
       name: "",
-      originalName: "",
+      originalName: ""
     };
   },
   methods: {
@@ -63,7 +58,7 @@ export default {
 
       if (this.name !== this.originalName) {
         data = {
-          name: this.name,
+          name: this.name
         };
       } else {
         return alert("You have not changed the deck's name.");
@@ -75,18 +70,18 @@ export default {
           data,
           {
             headers: {
-              Authorization: `Bearer ${token}`,
-            },
+              Authorization: `Bearer ${token}`
+            }
           }
         )
-        .then((resp) => {
+        .then(resp => {
           console.log("Deck's name was changed");
           router.push("/cards");
         })
         .catch(function(err) {
           console.log(err);
         });
-    },
+    }
   },
   created() {
     const token = localStorage.getItem("token");
@@ -96,18 +91,18 @@ export default {
         `https://study-app-api.herokuapp.com/api/v1/decks/${this.$route.params.id}`,
         {
           headers: {
-            Authorization: `Bearer ${token}`,
-          },
+            Authorization: `Bearer ${token}`
+          }
         }
       )
-      .then((resp) => {
+      .then(resp => {
         this.name = resp.data.data[0].name;
         this.originalName = resp.data.data[0].name;
       })
       .catch(function(err) {
         console.log(err);
       });
-  },
+  }
 };
 </script>
 

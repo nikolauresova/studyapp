@@ -3,18 +3,23 @@
     <header class="header">
       <router-link class="logo" to="/">#studyApp</router-link>
       <input class="menu-btn" type="checkbox" id="menu-btn" />
-      <label class="menu-icon" for="menu-btn"
-        ><span class="navicon"></span
-      ></label>
+      <label class="menu-icon" for="menu-btn">
+        <span class="navicon"></span>
+      </label>
       <ul class="menu">
-        <li><router-link to="/Sign">Sign up</router-link></li>
+        <li>
+          <router-link to="/Sign">Sign up</router-link>
+        </li>
+        <li>
+          <router-link to="/about">About</router-link>
+        </li>
       </ul>
 
       <main>
         <section class="site-title">
           <div class="site-background">
-            <h3>Learning can be fun</h3>
-            <h1>Create cards and learn languages all over the world</h1>
+            <h3>Learning can be fun.</h3>
+            <h1>Create cards and learn with us.</h1>
             <button class="btn" @click="login">Get started</button>
           </div>
         </section>
@@ -31,13 +36,13 @@ export default {
   methods: {
     login() {
       this.$router.push("/login");
-    },
+    }
   },
   mounted() {
     if (localStorage.getItem("token")) {
       this.$router.push("/cards");
     }
-  },
+  }
 };
 </script>
 
