@@ -58,6 +58,7 @@
 
 <script>
 import axios from "axios";
+import router from "../index";
 export default {
   name: "Word",
   data() {
@@ -103,9 +104,7 @@ export default {
       axios
         .put(
           `https://study-app-api.herokuapp.com/api/v1/vocabulary/${this.vocabularyId}`,
-          {
-            dataJSON,
-          },
+          data,
           {
             headers: {
               Authorization: `Bearer ${token}`,
@@ -114,7 +113,7 @@ export default {
         )
         .then((resp) => {
           console.log(`Vocabulary with ${this.vocabularyId} was updated`);
-          // location.href = `/viewer/${this.deckId}`;
+          router.push(`/viewer/${this.deckId}`);
         })
         .catch(function(err) {
           console.log(err);
