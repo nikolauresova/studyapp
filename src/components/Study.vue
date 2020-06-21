@@ -39,14 +39,14 @@
                 src="/assets/sad.png"
                 alt="no"
                 width="50px"
-                @click="correctReply"
+                @click="incorrectReply"
               />
               <img
                 class="img_smile"
                 src="/assets/smile.png"
                 alt="ok"
                 width="50px"
-                @click="incorrectReply"
+                @click="correctReply"
               />
             </div>
           </table>
@@ -101,12 +101,15 @@ export default {
     correctReply() {
       this.status++;
       console.log(this.status);
+      console.log(this.data);
 
       this.data.status = this.status;
       this.sendReply(this.data);
       this.getReviews();
     },
     incorrectReply() {
+      console.log(this.status);
+      console.log(this.data);
       this.sendReply(this.data);
       this.getReviews();
     },
@@ -115,9 +118,7 @@ export default {
       axios
         .put(
           `https://study-app-api.herokuapp.com/api/v1/vocabulary/${this.vocabularyId}`,
-          {
-            data,
-          },
+          data,
           {
             headers: {
               Authorization: `Bearer ${token}`,
