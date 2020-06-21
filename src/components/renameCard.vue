@@ -14,37 +14,28 @@
     <div class="nav">
       <div class="container">
         <form
-          id="word"
+          id="createCard"
           action=""
           method="post"
-          @submit.prevent="updateVocabulary"
+          @submit.prevent="renameCard"
         >
-          <h3>Edit word</h3>
+          <h3>Change deck's name</h3>
 
           <fieldset>
             <input
               type="text"
-              placeholder="Front"
-              required
-              autofocus
-              v-model="front"
-            />
-          </fieldset>
-          <fieldset>
-            <input
-              type="text"
-              placeholder="Back"
-              v-model="back"
+              placeholder="Name your deck"
+              id="card_input"
+              v-model="name"
               required
               autofocus
             />
           </fieldset>
-
           <fieldset>
             <button
               name="submit"
               type="submit"
-              id="word-submit"
+              id="card-submit"
               data-submit="Sending"
             >
               Submit
@@ -60,50 +51,29 @@
 import axios from "axios";
 import router from "../index";
 export default {
-  name: "editWord",
+  name: "renameCard",
   data() {
     return {
-      front: "",
-      back: "",
-      originalFront: "",
-      originalBack: "",
-      vocabularyId: this.$route.params.id,
-      deckId: "",
+      name: "",
+      originalName: "",
     };
   },
   methods: {
-    updateVocabulary() {
+    renameCard() {
       const token = localStorage.getItem("token");
       let data = {};
 
-      if (
-        this.front !== this.originalFront &&
-        this.back !== this.originalBack
-      ) {
+      if (this.name !== this.originalName) {
         data = {
-          front: this.front,
-          back: this.back,
-        };
-      } else if (this.front !== this.originalFront) {
-        data = {
-          front: this.front,
-        };
-      } else if (this.back !== this.originalBack) {
-        data = {
-          front: this.back,
+          name: this.name,
         };
       } else {
-        return alert("You have not made any changes to the vocabulary");
+        return alert("You have not changed the deck's name.");
       }
-
-      const dataJSON = JSON.stringify(data);
-      console.log(dataJSON);
-      console.log(this.vocabularyId);
-      console.log(this.deckId);
 
       axios
         .put(
-          `https://study-app-api.herokuapp.com/api/v1/vocabulary/${this.vocabularyId}`,
+          `https://study-app-api.herokuapp.com/api/v1/decks/${this.$route.params.id}`,
           data,
           {
             headers: {
@@ -112,8 +82,8 @@ export default {
           }
         )
         .then((resp) => {
-          console.log(`Vocabulary with ${this.vocabularyId} was updated`);
-          router.push(`/viewer/${this.deckId}`);
+          console.log("Deck's name was changed");
+          router.push("/cards");
         })
         .catch(function(err) {
           console.log(err);
@@ -125,7 +95,7 @@ export default {
 
     axios
       .get(
-        `https://study-app-api.herokuapp.com/api/v1/vocabulary/${this.vocabularyId}`,
+        `https://study-app-api.herokuapp.com/api/v1/decks/${this.$route.params.id}`,
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -133,11 +103,8 @@ export default {
         }
       )
       .then((resp) => {
-        this.front = resp.data.data[0].front;
-        this.originalFront = resp.data.data[0].front;
-        this.back = resp.data.data[0].back;
-        this.originalBack = resp.data.data[0].back;
-        this.deckId = resp.data.data[0].deck._id;
+        this.name = resp.data.data[0].name;
+        this.originalName = resp.data.data[0].name;
       })
       .catch(function(err) {
         console.log(err);
@@ -159,10 +126,11 @@ a {
 }
 
 /* header */
-
+.nav {
+  margin-top: 150px;
+}
 .header {
   box-shadow: 1px 1px 4px 0 rgba(0, 0, 0, 0.1);
-  position: fixed;
   width: 100%;
   background-image: url("../assets/img1.jpg");
   background-size: cover;
@@ -290,32 +258,29 @@ a {
     display: none;
   }
 }
-/*form*/
-.nav {
-  margin-top: 150px;
-}
+
 .container {
-  max-width: 350px;
+  max-width: 400px;
   margin: 0 auto;
   position: relative;
   box-shadow: 0px 0px 15px 0px rgba(0, 0, 0, 0.45);
 }
 
-#word input {
+#createCard input {
   font: 400 12px/16px "Lato", sans-serif;
-  width: 279px;
+  max-width: 329px;
 }
 
-#word {
+#createCard {
   background: #f3eeee7e;
   padding: 25px;
   margin: 50px 0;
 }
 
-#word h3 {
+#createCard h3 {
   color: #3f4954;
-  display: block;
   text-align: center;
+  display: block;
   font-size: 30px;
   font-weight: 400;
   margin-bottom: 25px;
@@ -329,28 +294,30 @@ fieldset {
   width: 100%;
 }
 
-#word input {
+#createCard input {
+  width: 100%;
   border: 1px solid #ccc;
   background: #fff;
   margin: 0 0 5px;
   padding: 10px;
 }
 
-#word input:hover {
+#dcreateCard input:hover {
   border: 1px solid #aaa;
 }
 
-#word button {
+#createCard button {
   cursor: pointer;
   border: none;
   background: rgb(75, 182, 209);
   color: #fff;
+  margin-top: 20px;
   padding: 10px;
   font-size: 14px;
   width: 100%;
 }
 
-#word button:hover {
+#createCard button:hover {
   background: #09c;
   transition: background-color 0.3s ease-in-out;
 }
