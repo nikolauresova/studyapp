@@ -13,8 +13,25 @@
       <main>
         <section class="site-title">
           <div class="site-background">
-            <h2>Learning can be fun</h2>
-            <h1>Create cards and learn languages all over the world</h1>
+            <h2>This is an application to help you learn languages all over the world.</h2>
+            <h2> First step is Login, in second step create card and in the new card add word. In the tab Cards can add word, study and browser words. When you can delete cards or words. </h2><br>
+
+
+<div class="text">
+          <h3>clarification study mode:</h3>
+In List words have table with 'status'. Status is level learning.<br>
+
+<p>status 1 is  Newbie - learn words today,</p>
+<p>status 2 is Apprentice - learn words tomorrow,</p>
+<p>status 3 is intermediate - learn words in 4 days,</p>
+<p>status 4 is Master - learn words id 7 days,</p>
+<p>status 5 is Genius - learn words in 30 days,</p>
+<p>status 6 is Guru - words know</p>
+
+</div>
+           
+
+            
             <button class="btn" @click="login">Get started</button>
           </div>
           
@@ -29,7 +46,7 @@
 
 <script>
 export default {
-  name: "Homepage",
+  name: "About",
   methods: {
     login() {
       this.$router.push("/login");
@@ -41,6 +58,12 @@ export default {
 <style lang="css">
 .contact {
   text-align: center;
+}
+.text {
+  font-size: 20px;
+  color: #7E7E7E;
+  text-align:center;
+  
 }
 
 
@@ -59,7 +82,6 @@ a {
 /* header */
 
 .header {
-  box-shadow: 1px 1px 4px 0 rgba(0, 0, 0, 0.1);
   position: fixed;
   width: 100%;
   background-image: url("../assets/img1.jpg");
@@ -216,9 +238,9 @@ main .site-title .btn:hover {
 /*site title */
 main .site-title .site-background {
   color: #fff;
-  padding-top: 250px;
-  text-align: center;
-  text-shadow: 0 1px 2px hsla(0, 0%, 4%, 0.6);
+  padding-top: 200px;
+  padding: 30px;
+  text-align: center
 }
 
 main .site-title .btn {
