@@ -6,10 +6,8 @@
       ><span class="navicon"></span
     ></label>
     <ul class="menu">
-      <li><router-link to="/login">Login</router-link></li>
-      <li><a href="#about">X</a></li>
-      <li><a href="#careers">X</a></li>
-      <li><a href="#contact">X</a></li>
+      <li><router-link to="/logout">Logout</router-link></li>
+      <li><router-link to="/cards">Cards</router-link></li>
     </ul>
     <div class="nav">
       <div class="container">
@@ -23,7 +21,7 @@
                 <th scope="col">Front</th>
                 <th scope="col">Back</th>
                 <th scope="col">Status</th>
-                <th colspan="2" scope="col">Change</th>
+                <th colspan="3" scope="col">Change</th>
               </tr>
             </thead>
             <tbody>
@@ -33,6 +31,7 @@
                 <td data-label="Amount">{{ item.status }}</td>
                 <td @click="removeVocabulary(item._id)">X</td>
                 <td @click="editVocabulary(item._id)">I</td>
+                <td @click="addVocabulary()">+</td>
               </tr>
             </tbody>
           </table>
@@ -44,8 +43,9 @@
 
 <script>
 import axios from "axios";
+import router from "../index";
 export default {
-  name: "Sign",
+  name: "Viewer",
   data() {
     return {
       deckId: this.$route.params.id,
@@ -53,6 +53,9 @@ export default {
     };
   },
   methods: {
+    addVocabulary() {
+      this.$router.push(`/word/${this.deckId}`);
+    },
     getVocabulary() {
       const token = localStorage.getItem("token");
 
