@@ -14,7 +14,9 @@
         <div class="tab">
           <table>
             <caption>
-              List of items
+              {{
+                deckName
+              }}
             </caption>
             <thead>
               <tr>
@@ -49,6 +51,7 @@ export default {
   data() {
     return {
       deckId: this.$route.params.id,
+      deckName: "Deck",
       vocabulary: [],
     };
   },
@@ -70,6 +73,7 @@ export default {
         )
         .then((resp) => {
           this.vocabulary = resp.data.data;
+          this.deckName = resp.data.data[0].deck.name;
           console.log(this.vocabulary);
         })
         .catch(function(err) {
