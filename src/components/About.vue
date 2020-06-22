@@ -13,7 +13,7 @@
         <router-link to="/login">Log in</router-link>
       </li>
       <li v-if="hasToken">
-        <router-link to="/cards">Cards</router-link>
+        <router-link to="/cards">Decks</router-link>
       </li>
     </ul>
     <div class="nav">
@@ -208,7 +208,6 @@ a {
   .header .menu-icon {
     display: none;
   }
-  
 }
 /*form*/
 .nav {

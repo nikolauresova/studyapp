@@ -10,7 +10,7 @@
         <router-link to="/logout">Logout</router-link>
       </li>
       <li>
-        <router-link to="/cards">Cards</router-link>
+        <router-link to="/cards">Decks</router-link>
       </li>
       <li>
         <router-link to="/about">About</router-link>
@@ -73,7 +73,7 @@ export default {
         })
         .catch(function(err) {
           console.log(err);
-          alert("Vocabulary already exists.");
+          alert("Deck already exists.");
         });
     }
   }

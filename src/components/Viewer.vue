@@ -10,7 +10,7 @@
         <router-link to="/logout">Logout</router-link>
       </li>
       <li>
-        <router-link to="/cards">Cards</router-link>
+        <router-link to="/cards">Decks</router-link>
       </li>
       <li>
         <router-link to="/about">About</router-link>
@@ -19,6 +19,13 @@
     <div class="nav">
       <div class="container">
         <div class="tab">
+          <img
+            id="backArrow"
+            src="/assets/backArrow.svg"
+            alt="backArrow"
+            width="20px"
+            @click="backToCards"
+          />
           <table>
             <caption>
               {{
@@ -63,6 +70,9 @@ export default {
     };
   },
   methods: {
+    backToCards() {
+      router.push(`/cards`);
+    },
     addVocabulary() {
       this.$router.push(`/word/${this.deckId}`);
     },
@@ -115,6 +125,10 @@ export default {
 </script>
 
 <style scoped>
+#backArrow {
+  margin-left: 90%;
+}
+
 .pointer {
   cursor: pointer;
 }
