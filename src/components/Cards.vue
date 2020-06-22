@@ -299,7 +299,7 @@ a {
 .header {
   width: 100%;
   z-index: 3;
-  background-image: url("../assets/img1.jpg");
+  background-image: url("/assets/img1.jpg");
   background-size: cover;
   background-position: center;
   height: 100vh;

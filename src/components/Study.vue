@@ -204,13 +204,13 @@ a {
 
 /* header */
 .nav {
-  margin-top: 150px;
+  margin-top: 100px;
 }
 .header {
   box-shadow: 1px 1px 4px 0 rgba(0, 0, 0, 0.1);
   position: fixed;
   width: 100%;
-  background-image: url("../assets/img1.jpg");
+  background-image: url("/assets/img1.jpg");
   background-size: cover;
   background-position: center;
   height: 100vh;
