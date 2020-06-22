@@ -1,73 +1,71 @@
 <template>
-  <div class="container">
-    <header class="header">
-      <router-link class="logo" to="/">#studyApp</router-link>
-      <input class="menu-btn" type="checkbox" id="menu-btn" />
-      <label class="menu-icon" for="menu-btn"
-        ><span class="navicon"></span
-      ></label>
-      <ul class="menu">
-        <li><router-link to="/Sign">Sign up</router-link></li>
-      </ul>
-
-      <main>
-        <section class="site-title">
-          <div class="site-background">
-            <h2>This is an application to help you learn languages all over the world.</h2>
-            <h2> First step is Login, in second step create card and in the new card add word. In the tab Cards can add word, study and browser words. When you can delete cards or words. </h2><br>
-
-
-<div class="text">
-          <h3>clarification study mode:</h3>
-In List words have table with 'status'. Status is level learning.<br>
-
-<p>status 1 is  Newbie - learn words today,</p>
-<p>status 2 is Apprentice - learn words tomorrow,</p>
-<p>status 3 is intermediate - learn words in 4 days,</p>
-<p>status 4 is Master - learn words id 7 days,</p>
-<p>status 5 is Genius - learn words in 30 days,</p>
-<p>status 6 is Guru - words know</p>
-
-</div>
-           
-
-            
-            <button class="btn" @click="login">Get started</button>
-          </div>
-          
-        </section>
-        
-      </main>
-      
-    </header>
-    <router-view></router-view>
-  </div>
+  <header class="header">
+    <router-link class="logo" to="/">#studyApp</router-link>
+    <input class="menu-btn" type="checkbox" id="menu-btn" />
+    <label class="menu-icon" for="menu-btn">
+      <span class="navicon"></span>
+    </label>
+    <ul class="menu">
+      <li v-if="!hasToken">
+        <router-link to="/sign">Sign up</router-link>
+      </li>
+      <li v-if="!hasToken">
+        <router-link to="/login">Log in</router-link>
+      </li>
+      <li v-if="hasToken">
+        <router-link to="/cards">Cards</router-link>
+      </li>
+    </ul>
+    <div class="nav">
+      <div class="container">
+        <div id="log">
+          <h3>About</h3>
+          <p>This application will help you learn not only languages.</p>
+          <p>Create your own deck of cards to help you study.</p>
+          <br />
+          <h4>Study mode clarification:</h4>
+          <p>- status level is the level of learning</p>
+          <p>- status 1 is Newbie - the word will repeat today</p>
+          <p>- status 2 is Apprentice - the word will repeat tomorrow</p>
+          <p>- status 3 is intermediate - the word will repeat in 4 days</p>
+          <p>- status 4 is Master - the word will repeat in 7 days</p>
+          <p>- status 5 is Genius - the word will repeat in 30 days</p>
+          <p>- status 6 is Guru - the word will no longer repeat</p>
+          <br />
+          <h4>About authors:</h4>
+          <p>To see more of our projects, follow us on github:</p>
+          <p>
+            <a href="https://github.com/nikolauresova" target="_blank">Nikol (frontend)</a>,
+            <a href="https://github.com/eien11" target="_blank">Adela (backend)</a>
+          </p>
+          <p>You can also visit our linkedin profiles:</p>
+          <a href="https://www.linkedin.com/in/nikolauresova/" target="_blank">Nikol (frontend)</a>,
+          <a href="https://www.linkedin.com/in/adela-matouskova/" target="_blank">Adela (backend)</a>
+        </div>
+      </div>
+    </div>
+  </header>
 </template>
 
 <script>
+import axios from "axios";
+import router from "../index";
 export default {
-  name: "About",
-  methods: {
-    login() {
-      this.$router.push("/login");
-    },
+  name: "Logout",
+  data() {
+    return {
+      hasToken: false
+    };
   },
+  mounted() {
+    if (localStorage.getItem("token")) {
+      this.hasToken = true;
+    }
+  }
 };
 </script>
 
-<style lang="css">
-.contact {
-  text-align: center;
-}
-.text {
-  font-size: 20px;
-  color: #7E7E7E;
-  text-align:center;
-  
-}
-
-
-/*nav*/
+<style scoped>
 body {
   margin: 0;
   font-family: Lato, sans-serif;
@@ -82,6 +80,7 @@ a {
 /* header */
 
 .header {
+  box-shadow: 1px 1px 4px 0 rgba(0, 0, 0, 0.1);
   position: fixed;
   width: 100%;
   background-image: url("../assets/img1.jpg");
@@ -210,37 +209,65 @@ a {
     display: none;
   }
 }
-
-h1 {
-  font-size: 2.5rem;
-  margin: 1rem;
+/*form*/
+.nav {
+  margin-top: 150px;
 }
-h3 {
-  font-size: 1.3rem;
-  margin: 1rem;
+.container {
+  max-width: 500px;
+  margin: 0 auto;
+  position: relative;
+  box-shadow: 0px 0px 15px 0px rgba(0, 0, 0, 0.45);
 }
 
-.btn {
-  border: none;
-  border-radius: 5px;
-  padding: 1rem 3rem;
-  font-size: 1rem;
+#log input {
+  font: 400 12px/16px "Lato", sans-serif;
+  width: 279px;
+}
+
+#log {
+  background: #f3eeee7e;
+  padding: 25px;
+  margin: 50px 0;
+  overflow: auto;
+}
+
+#log h3 {
+  color: #3f4954;
+  display: block;
+  text-align: center;
+  font-size: 30px;
+  font-weight: 400;
+  margin-bottom: 25px;
+}
+
+fieldset {
+  border: medium none !important;
+  margin: 0 0 10px;
+  min-width: 100%;
+  padding: 0;
+  width: 100%;
+}
+
+#log input {
+  border: 1px solid #ccc;
+  background: #fff;
+  margin: 0 0 5px;
+  padding: 10px;
+}
+
+#log input:hover {
+  border: 1px solid #aaa;
+}
+
+#log button {
   cursor: pointer;
-  color: white;
-}
-main .site-title .btn:hover {
-  transition: background-color 0.3s ease-in-out;
-  background-color: #09c;
-}
-
-/*main section*/
-
-/*site title */
-main .site-title .site-background {
+  border: none;
+  background: rgb(75, 182, 209);
   color: #fff;
-  padding-top: 200px;
-  padding: 30px;
-  text-align: center
+  padding: 10px;
+  font-size: 14px;
+  width: 100%;
 }
 
 main .site-title .btn {

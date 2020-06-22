@@ -2,52 +2,43 @@
   <header class="header">
     <router-link class="logo" to="/">#studyApp</router-link>
     <input class="menu-btn" type="checkbox" id="menu-btn" />
-    <label class="menu-icon" for="menu-btn"
-      ><span class="navicon"></span
-    ></label>
+    <label class="menu-icon" for="menu-btn">
+      <span class="navicon"></span>
+    </label>
     <ul class="menu">
-      <li><router-link to="/logout">Logout</router-link></li>
-      <li><router-link to="/cards">Cards</router-link></li>
+      <li>
+        <router-link to="/logout">Logout</router-link>
+      </li>
+      <li>
+        <router-link to="/cards">Cards</router-link>
+      </li>
+      <li>
+        <router-link to="/about">About</router-link>
+      </li>
     </ul>
     <div class="nav">
       <div class="container">
-        <form
-          id="word"
-          action=""
-          method="post"
-          @submit.prevent="createVocabulary"
-        >
+        <form id="word" action method="post" @submit.prevent="createVocabulary">
+          <img
+            id="backArrow"
+            src="/assets/backArrow.svg"
+            alt="backArrow"
+            width="20px"
+            @click="backToCards"
+          />
           <h3>Create word</h3>
 
           <fieldset>
-            <input
-              type="text"
-              placeholder="Front"
-              required
-              autofocus
-              v-model="front"
-            />
+            <input type="text" placeholder="Front" required autofocus v-model="front" />
           </fieldset>
           <fieldset>
-            <input
-              type="text"
-              placeholder="Back"
-              v-model="back"
-              required
-              autofocus
-            />
+            <input type="text" placeholder="Back" v-model="back" required autofocus />
           </fieldset>
 
           <fieldset>
-            <button
-              name="submit"
-              type="submit"
-              id="word-submit"
-              data-submit="Sending"
-            >
-              Submit
-            </button>
+            <button name="submit" type="submit" id="word-submit" data-submit="Sending">Submit</button>
           </fieldset>
+          <p id="successMessage" v-show="show">Vocabulary was added to deck.</p>
         </form>
       </div>
     </div>
@@ -56,6 +47,7 @@
 
 <script>
 import axios from "axios";
+import router from "../index";
 export default {
   name: "Word",
   data() {
@@ -63,9 +55,17 @@ export default {
       front: "",
       back: "",
       deckId: this.$route.params.id,
+      show: false
     };
   },
   methods: {
+    backToCards() {
+      router.push(`/viewer/${this.deckId}`);
+    },
+    showSuccessMessage() {
+      this.show = true;
+      setTimeout(() => (this.show = false), 1500);
+    },
     createVocabulary() {
       const token = localStorage.getItem("token");
 
@@ -74,15 +74,16 @@ export default {
           `https://study-app-api.herokuapp.com/api/v1/decks/${this.deckId}/vocabulary`,
           {
             front: this.front,
-            back: this.back,
+            back: this.back
           },
           {
             headers: {
-              Authorization: `Bearer ${token}`,
-            },
+              Authorization: `Bearer ${token}`
+            }
           }
         )
-        .then((resp) => {
+        .then(resp => {
+          this.showSuccessMessage();
           console.log("Vocabulary was added to database");
           this.front = "";
           this.back = "";
@@ -91,12 +92,21 @@ export default {
           console.log(err);
           alert("Vocabulary already exists.");
         });
-    },
-  },
+    }
+  }
 };
 </script>
 
 <style scoped>
+#backArrow {
+  margin-left: 90%;
+}
+
+#successMessage {
+  color: green;
+  font-weight: bold;
+}
+
 body {
   margin: 0;
   font-family: Lato, sans-serif;
