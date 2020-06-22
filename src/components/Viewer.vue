@@ -125,6 +125,10 @@ export default {
 </script>
 
 <style scoped>
+table {
+  word-wrap:break-word;
+}
+
 #backArrow {
   margin-left: 90%;
 }

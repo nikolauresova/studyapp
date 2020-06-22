@@ -169,14 +169,15 @@ table caption {
 .imgs {
   display: flex;
   justify-content: space-around;
+  padding-top: 20px;
 }
 .word1 {
   text-align: center;
-  font-size: 35px;
+  font-size: 27px;
 }
 .word2 {
   text-align: center;
-  font-size: 35px;
+  font-size: 27px;
 }
 body {
   margin: 0;
