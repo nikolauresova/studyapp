@@ -60,7 +60,7 @@ export default {
   },
   methods: {
     backToCards() {
-      router.push(`/viewer/${this.deckId}`);
+      router.push(`/cards`);
     },
     showSuccessMessage() {
       this.show = true;

@@ -88,7 +88,8 @@ export default {
         )
         .then(resp => {
           console.log(resp.data.data);
-          console.log("Test");
+          console.log(resp.data.count);
+          console.log(resp.data);
           if (resp.data.count === 0) {
             router.push(`/results`);
           } else {
@@ -112,8 +113,11 @@ export default {
       this.getReviews();
     },
     async incorrectReply() {
+      this.status = 1;
       console.log(this.status);
       console.log(this.data);
+
+      this.data.status = this.status;
       await this.sendReply(this.data);
       this.getReviews();
     },
