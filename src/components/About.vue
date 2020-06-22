@@ -246,6 +246,5 @@ main .site-title .site-background {
 main .site-title .btn {
   margin: 1.8rem;
   background: rgba(9, 185, 255, 0.788);
-  text-shadow: 0 1px 2px hsla(0, 0%, 4%, 0.6);
 }
 </style>
